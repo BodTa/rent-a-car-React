@@ -1,0 +1,30 @@
+.navbar {
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  max-height: 10vh;
+  padding: 1rem;
+  background-color: #222831;
+}
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+}
+.navbar ul li {
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.navbar ul li:hover {
+  transform: scale(1.1);
+}
+.navbar ul li a {
+  text-decoration: none;
+}
+.navbar ul li a:hover {
+  color: bisque;
+}/*# sourceMappingURL=navbar.css.map */

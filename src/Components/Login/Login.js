@@ -9,18 +9,18 @@ const LOGIN_URL = "/auth/login";
 
 const Login = () => {
   const { auth, setAuth } = useAuth();
-
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
+  const from = location.state?.from?.pathname || "/"; //To locate the user to where he/she came from.
   const emailRef = useRef();
   const errRef = useRef();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-
+  const show = async () => {
+    console.log(auth);
+  };
   useEffect(() => {
     emailRef.current.focus();
   }, []);
@@ -28,6 +28,7 @@ const Login = () => {
   useEffect(() => {
     setErrMsg("");
   }, [email, password]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -40,21 +41,15 @@ const Login = () => {
         }
       );
       const accessToken = response.data.accessToken.token;
-      const decodedToken = jwt_decode(accessToken);
+      const decodedToken = await jwt_decode(accessToken);
       const roles =
         decodedToken[
           "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ];
+      setAuth({ roles, email, password, accessToken });
       setEmail("");
       setPassword("");
       navigate(from, { replace: true });
-      setAuth({
-        email: email,
-        password: password,
-        roles: roles,
-        accessToken: accessToken,
-      });
-      console.log(JSON.stringify(auth));
     } catch (error) {
       if (!error?.response) {
         setErrMsg("No Server Response");
@@ -98,6 +93,7 @@ const Login = () => {
           required
         />
         <button className="">Sign In</button>
+
         <p>
           Need an Account? <br />
           <span className="line">
@@ -105,6 +101,8 @@ const Login = () => {
           </span>
         </p>
       </form>
+      <br />
+      <button onClick={show}>Show auth</button>
     </section>
   );
 };

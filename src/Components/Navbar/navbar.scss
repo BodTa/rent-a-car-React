@@ -1,0 +1,28 @@
+@import "../styles/style.scss";
+
+.navbar {
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  max-height: 10vh;
+  padding: 1rem;
+  background-color: #222831;
+  ul {
+    list-style: none;
+    @include flexCenter(row);
+    column-gap: 1rem;
+    li {
+      cursor: pointer;
+      transition: 0.3s ease;
+      &:hover {
+        transform: scale(1.1);
+      }
+      a {
+        text-decoration: none;
+        &:hover {
+          color: bisque;
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ const useRefreshToken = () => {
       console.log(prev);
       return {
         ...prev,
+        email: "123",
         accessToken: response.data,
       };
     });

@@ -1,0 +1,34 @@
+.car-container {
+  width: 100%;
+  padding: 1rem;
+  height: 80%;
+  font-size: 0.6rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  grid-template: auto auto/repeat(5, 1fr);
+  gap: 1rem;
+}
+.car-container .car-card {
+  background: rgba(255, 255, 255, 0.26);
+  max-width: 320px;
+  height: 330px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 5%;
+}
+.car-container .car-card button {
+  font-size: 0.6rem;
+}
+.car-container img {
+  width: 100%;
+  height: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=Cars.css.map */
