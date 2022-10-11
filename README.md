@@ -1,1 +1,3 @@
-**This project made by using React. For comminucate with backend API I used axios.**
+**This project made by using React.**
+<br/>
+**Connected with Back end(RENTACAR BACKEND)**
