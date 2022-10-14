@@ -1,6 +1,7 @@
 import React from "react";
-
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 const Rent = () => {
+  const axiosPrivate = useAxiosPrivate();
   return (
     <section>
       <h1>Renting Page</h1>

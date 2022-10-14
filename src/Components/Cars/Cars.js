@@ -1,10 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import useCars from "../../hooks/useCars";
+import useAuth from "../../hooks/useAuth";
+import useGeneral from "../../hooks/useGeneral";
 import Card from "./Card";
-
 const Cars = () => {
-  const { cars, setCars } = useCars();
+  const { auth } = useAuth();
+  const { cars, setCars, favorites, setFavorites } = useGeneral();
+  useEffect(() => {
+    const getFavs = async () => {
+      try {
+        if (auth?.accessToken) {
+          const response = await axios.get(
+            `/favorites/getbyuserid?userId=${auth?.userId}`
+          );
+          setFavorites(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getFavs();
+    return () => {};
+  }, []);
   useEffect(() => {
     const getCars = async () => {
       try {
@@ -17,20 +34,9 @@ const Cars = () => {
     getCars();
     return () => {};
   }, []);
-  // Images coming from car dto no need this.
-  //  useEffect(() => {
-  //    const getImages = async () => {
-  //      try {
-  //        const response = await axios.get("/images/getall", {
-  //          withCredentials: true,
-  //        });
-  //        setCarImages(response.data);
-  //      } catch (error) {}
-  //    };
-  //    getImages();
-  //    return () => {};
-  //  }, [])
+
   const carCard = cars?.map((car) => {
+    const isFavorited = favorites.some(({ carId }) => carId === car.carId);
     return (
       <Card
         key={car.carId}
@@ -38,8 +44,11 @@ const Cars = () => {
         carName={car.carName}
         dailyPrice={car.dailyPrice}
         modelYear={car.modelYear}
+        carId={car.carId}
         description={car.description}
-        imagePath={car.images[0].imagePath}
+        isFavorited={isFavorited}
+        setFavorites={setFavorites}
+        imagePath={"http://localhost:5149" + car.images[0].imagePath}
       />
     );
   });

@@ -10,6 +10,7 @@ html {
   font-family: "Poppins", sans-serif;
   font-size: 22px;
   color: #fff;
+  scroll-behavior: smooth;
 }
 
 body {

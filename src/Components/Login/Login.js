@@ -5,9 +5,11 @@ import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import useGeneral from "../../hooks/useGeneral";
 const LOGIN_URL = "/auth/login";
 
 const Login = () => {
+  const { ToastContainer, toast } = useGeneral();
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,9 +20,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const show = async () => {
-    console.log(auth);
-  };
   useEffect(() => {
     emailRef.current.focus();
   }, []);
@@ -40,27 +39,40 @@ const Login = () => {
           withCredentials: true,
         }
       );
+      const userResponse = await axios.get(`/Users/getbyemail?email=${email}`);
+      const userId = userResponse.data.data.userId;
       const accessToken = response.data.accessToken.token;
       const decodedToken = await jwt_decode(accessToken);
       const roles =
         decodedToken[
           "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ];
-      setAuth({ roles, email, password, accessToken });
+      setAuth({ roles, email, password, accessToken, userId });
       setEmail("");
       setPassword("");
       navigate(from, { replace: true });
     } catch (error) {
       if (!error?.response) {
-        setErrMsg("No Server Response");
+        notify("No Server Response");
       }
-      setErrMsg(error.message);
-      errRef.current.focus();
-      console.log(error);
+      notify(error.response.data);
     }
+  };
+  const notify = (message) => {
+    toast.error(message, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   return (
     <section onSubmit={handleSubmit}>
+      <ToastContainer />
       <p
         ref={errRef}
         className={errMsg ? "errmsg" : "offscreen"}
@@ -101,8 +113,6 @@ const Login = () => {
           </span>
         </p>
       </form>
-      <br />
-      <button onClick={show}>Show auth</button>
     </section>
   );
 };
