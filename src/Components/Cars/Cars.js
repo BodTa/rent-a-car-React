@@ -6,6 +6,8 @@ import Card from "./Card";
 const Cars = () => {
   const { auth } = useAuth();
   const { cars, setCars, favorites, setFavorites } = useGeneral();
+
+  // Getting user favorites
   useEffect(() => {
     const getFavs = async () => {
       try {
@@ -22,6 +24,7 @@ const Cars = () => {
     getFavs();
     return () => {};
   }, []);
+  // Getting cars data
   useEffect(() => {
     const getCars = async () => {
       try {
@@ -36,7 +39,7 @@ const Cars = () => {
   }, []);
 
   const carCard = cars?.map((car) => {
-    const isFavorited = favorites.some(({ carId }) => carId === car.carId);
+    const isFavorited = favorites?.some(({ carId }) => carId === car.carId);
     return (
       <Card
         key={car.carId}

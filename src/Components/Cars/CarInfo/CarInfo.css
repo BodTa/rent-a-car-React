@@ -1,0 +1,210 @@
+.carInfo-container {
+  padding: 1rem;
+  margin-top: 1rem;
+  height: 90vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+  grid-template: auto auto/repeat(2, 1fr);
+}
+.carInfo-container .car-sliders {
+  height: 80vh;
+  width: 100%;
+  background-color: #222831;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.carInfo-container .car-sliders .img-container {
+  padding-left: 0.3rem;
+  overflow: hidden;
+  height: 30%;
+  width: 100%;
+}
+.carInfo-container .car-sliders .img-container .small-card-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  grid-template: repeat(2/1fr)/repeat(8/1fr);
+  justify-content: flex-start;
+}
+.carInfo-container .car-sliders .img-container .small-card-container .small-img-card {
+  cursor: pointer;
+  height: 90%;
+  width: 38%;
+}
+.carInfo-container .car-sliders .img-container .small-card-container .small-img-card img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.carInfo-container .car-sliders .car-slider {
+  color: black;
+  height: 75%;
+  position: relative;
+  background-color: rgb(79, 55, 55);
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+}
+.carInfo-container .car-sliders .car-slider .car-slide {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+  border-radius: 5%;
+  transition: 0.5s ease-in-out;
+}
+.carInfo-container .car-sliders .car-slider .car-slide img {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.carInfo-container .car-sliders .car-slider #goRight, .carInfo-container .car-sliders .car-slider #goLeft {
+  transform: translateY(-50%);
+  width: 10%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 0%;
+  transition: 0.5s linear;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+.carInfo-container .car-sliders .car-slider #goRight:hover, .carInfo-container .car-sliders .car-slider #goLeft:hover {
+  background: rgba(255, 255, 255, 0.25);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+}
+.carInfo-container .car-sliders .car-slider #goRight .icons, .carInfo-container .car-sliders .car-slider #goLeft .icons {
+  height: 35px;
+}
+.carInfo-container .car-sliders .car-slider #goLeft {
+  left: 0;
+}
+.carInfo-container .car-sliders .car-slider #goRight {
+  right: 0;
+}
+.carInfo-container .car-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  height: 80vh;
+  background-color: red;
+}
+.carInfo-container .car-details .details-header {
+  width: 100%;
+  height: 8%;
+  background-color: #222831;
+  border-bottom: 3px solid #767676;
+}
+.carInfo-container .car-details .details {
+  width: 100%;
+  height: 75%;
+  background-color: #191d24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.carInfo-container .car-details .details .detail-icons {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.carInfo-container .car-details .details .detail-icons .detail-icon {
+  width: 20%;
+  height: 100%;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.carInfo-container .car-details .details .detail-icons .detail-icon-def {
+  width: 80%;
+  height: 100%;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.carInfo-container .car-details .details .detail-icons .detail-icon-def hr {
+  width: 90%;
+}
+.carInfo-container .car-details .details .detail-infos {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.carInfo-container .car-details .details .detail-infos hr {
+  width: 90%;
+}
+.carInfo-container .car-details .details-footer {
+  width: 100%;
+  height: 18%;
+  background-color: #191d24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.carInfo-container .car-details .details-footer button {
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  padding: 0;
+  font-size: 1rem;
+  height: 50%;
+  width: 40%;
+  border-radius: 0.5rem;
+  border: 2px solid black;
+  background: none;
+  transition: 0.3s ease-in-out;
+}
+.carInfo-container .car-details .details-footer button::before {
+  z-index: -1;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 0%;
+  background-color: #3a4750;
+}
+.carInfo-container .car-details .details-footer button:hover::before {
+  width: 100%;
+}
+.carInfo-container .car-details .details-footer button:hover {
+  transform: scale(1.1);
+}
+.carInfo-container .car-details {
+  z-index: 88;
+}/*# sourceMappingURL=CarInfo.css.map */

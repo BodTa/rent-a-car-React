@@ -5,13 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeartCirclePlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 import useGeneral from "../../hooks/useGeneral";
 const Card = (props) => {
   const { ToastContainer, toast } = useGeneral();
   const { auth } = useAuth();
-  const isFavorited = props.favorites?.some(
-    ({ carId: pCarId }) => pCarId === props.carId
-  );
+  const navigate = useNavigate();
   // Checking if car is in favs.
   const notify = () => {
     toast.info("Youu need to log in first.", {
@@ -25,7 +24,9 @@ const Card = (props) => {
       theme: "dark",
     });
   };
-
+  const handleClick = () => {
+    navigate(`/carinfo/${props.carId}`);
+  };
   const addToFav = async () => {
     if (auth) {
       try {
@@ -67,31 +68,24 @@ const Card = (props) => {
   return (
     <div>
       <div className="car-card">
-        <div className="card-header">
-          <h3 className="card-title">
-            {props.brandName} {props.carName}
-          </h3>
-        </div>
         <div className="card-img">
           <img src={props.imagePath} />
         </div>
         <div className="card-footer">
-          <h3>Daily Price: {props.dailyPrice}$</h3>
-          <br />
-          <h4>Description: {props.description}</h4>
-          <br />
-          <h4>Model Year: {props.modelYear}</h4>
-
+          <h3 className="car-price">{props.dailyPrice} $</h3>
+          <h3 className="card-title">
+            {props.brandName} {props.carName}
+          </h3>
           <div className="card-buttons">
             <div className="card-fav">
-              {!isFavorited && (
+              {!props.isFavorited && (
                 <FontAwesomeIcon
                   onClick={addToFav}
                   className="not-fav"
                   icon={faHeartCirclePlus}
                 />
               )}
-              {isFavorited && (
+              {props.isFavorited && (
                 <FontAwesomeIcon
                   onClick={removeFromFav}
                   className="is-fav"
@@ -100,10 +94,12 @@ const Card = (props) => {
               )}
             </div>
             <div className="buttons">
-              <Link to="/rent">
-                <button className="rent-btn">Rent</button>
-              </Link>
-              <button className="detail-btn">See More</button>
+              <button onClick={handleClick} className="learn-more">
+                <span className="circle" aria-hidden="true">
+                  <span className="icon arrow"></span>
+                </span>
+                <span className="button-text">Learn More</span>
+              </button>
             </div>
           </div>
         </div>

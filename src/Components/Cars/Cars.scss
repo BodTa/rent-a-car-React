@@ -2,6 +2,7 @@
 $fontSize: 0.7rem;
 
 .car-container {
+  text-align: center;
   margin-top: 1rem;
   width: 100%;
   padding: 1rem;
@@ -12,10 +13,15 @@ $fontSize: 0.7rem;
   grid-template: auto auto / repeat(4, 1fr);
   gap: 1rem;
   .car-card {
+    transition: 0.3s ease-in-out;
+    &:hover {
+      box-shadow: 0px 0px 10px 0.3px rgba(255, 255, 255, 0.605);
+      transform: scale(1.05);
+    }
     background: rgba(255, 255, 255, 0.26);
     max-width: 320px;
-    height: 450px;
-    box-shadow: 0px 0px 10px 0.3px rgba(255, 255, 255, 0.211);
+    height: 400px;
+
     padding: 0.8rem;
     @include flexCenter(column, flex);
     border-radius: 5%;
@@ -24,13 +30,36 @@ $fontSize: 0.7rem;
       font-size: 12px;
     }
     .card-title {
-      color: rgb(55, 55, 55);
+      transition: 0.3s ease;
+      color: #303841;
+      font-size: 0.8rem;
+      font-weight: bolder;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    .car-price {
+      transition: 0.3s ease;
+      font-size: 1.2rem;
+      color: #ededed;
+      font-weight: bolder;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    .car-img {
+      padding: 0;
+      margin: 0;
     }
   }
   img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    transition: 0.3s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
   .card-footer {
     width: 100%;
@@ -55,10 +84,11 @@ $fontSize: 0.7rem;
         cursor: pointer;
         color: rgba(255, 255, 255, 0.496);
         transition: 0.3s ease-in-out;
-        margin-top: 1rem;
+        margin-top: 1.2rem;
         margin-left: 1rem;
         height: 22px;
         &:hover {
+          transform: scale(1.1);
           color: rgb(246, 78, 78);
         }
       }
@@ -67,20 +97,85 @@ $fontSize: 0.7rem;
       }
     }
     .buttons {
-      width: 70%;
-      @include flexCenter(row, flex);
-      justify-content: space-evenly;
-    }
-    .rent-btn {
-      background-color: #a8e890;
-      &:hover {
-        background-color: #d6fca1;
+      width: 80%;
+      button {
+        position: relative;
+        display: inline-block;
+        outline: none;
+        border: 0;
+        vertical-align: middle;
+        text-decoration: none;
+        background: transparent;
+        padding: 0;
+        font-size: inherit;
+        font-family: inherit;
+        &:hover {
+          .circle {
+            width: 100%;
+            .icon.arrow {
+              background: #fff;
+              transform: translate(1rem, 0);
+            }
+          }
+          .button-text {
+            color: #fff;
+          }
+        }
       }
-    }
-    .detail-btn {
-      background-color: #ffd384;
-      &:hover {
-        background-color: #fff9b0;
+      .learn-more {
+        width: 7rem;
+        height: auto;
+        .circle {
+          transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+          position: relative;
+          display: block;
+          margin: 0;
+          width: 1.6rem;
+          height: 1.6rem;
+          background: #06283d76;
+          border-radius: 1.625rem;
+          .icon.arrow {
+            transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+            left: 0.1rem;
+            width: 0.95rem;
+            height: 0.075rem;
+            background: none;
+            &::before {
+              position: absolute;
+              content: "";
+              top: -0.29rem;
+              right: 0.0525rem;
+              width: 0.525rem;
+              height: 0.525rem;
+              border-top: 0.125rem solid #fff;
+              border-right: 0.125rem solid #fff;
+              transform: rotate(45deg);
+            }
+          }
+          .icon {
+            transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            background: #fff;
+          }
+        }
+        .button-text {
+          transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          padding: 0.3rem 0;
+          margin: 0 0 0 1.85rem;
+          color: #282936;
+          font-weight: 700;
+          line-height: 1.6;
+          text-align: center;
+          text-transform: uppercase;
+        }
       }
     }
   }

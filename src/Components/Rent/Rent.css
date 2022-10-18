@@ -1,1 +1,150 @@
-/*# sourceMappingURL=Rent.css.map */
+.rent-container {
+  padding: 1rem;
+  margin-top: 1rem;
+  height: 90vh;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.rent-container .car-sliders {
+  height: 80vh;
+  width: 100%;
+  background-color: #222831;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.rent-container .car-sliders .img-container {
+  padding-left: 0.3rem;
+  overflow: hidden;
+  height: 30%;
+  width: 100%;
+}
+.rent-container .car-sliders .img-container .small-card-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  grid-template: repeat(2/1fr)/repeat(8/1fr);
+  justify-content: flex-start;
+}
+.rent-container .car-sliders .img-container .small-card-container .small-img-card {
+  cursor: pointer;
+  height: 90%;
+  width: 38%;
+}
+.rent-container .car-sliders .img-container .small-card-container .small-img-card img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.rent-container .car-sliders .car-slider {
+  color: black;
+  height: 75%;
+  position: relative;
+  background-color: rgb(79, 55, 55);
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+}
+.rent-container .car-sliders .car-slider .car-slide {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+  border-radius: 5%;
+  transition: 0.5s ease-in-out;
+}
+.rent-container .car-sliders .car-slider .car-slide img {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.rent-container .car-sliders .car-slider #goRight, .rent-container .car-sliders .car-slider #goLeft {
+  transform: translateY(-50%);
+  width: 10%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 0%;
+  transition: 0.5s linear;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+.rent-container .car-sliders .car-slider #goRight:hover, .rent-container .car-sliders .car-slider #goLeft:hover {
+  background: rgba(255, 255, 255, 0.25);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+}
+.rent-container .car-sliders .car-slider #goRight .icons, .rent-container .car-sliders .car-slider #goLeft .icons {
+  height: 35px;
+}
+.rent-container .car-sliders .car-slider #goLeft {
+  left: 0;
+}
+.rent-container .car-sliders .car-slider #goRight {
+  right: 0;
+}
+.rent-container .car-sliders {
+  width: 60%;
+}
+
+.rent-form {
+  padding: 1rem;
+  height: 80vh;
+  width: 30%;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #222831;
+}
+.rent-form input[type=date] {
+  font-size: 0.8rem;
+  padding: 0.3rem;
+  border: none;
+}
+.rent-form button {
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  padding: 0;
+  font-size: 1rem;
+  height: 50%;
+  width: 40%;
+  border-radius: 0.5rem;
+  border: 2px solid black;
+  background: none;
+  transition: 0.3s ease-in-out;
+  width: 100%;
+  height: 10%;
+}
+.rent-form button::before {
+  z-index: -1;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 0%;
+  background-color: #3a4750;
+}
+.rent-form button:hover::before {
+  width: 100%;
+}
+.rent-form button:hover {
+  transform: scale(1.1);
+}/*# sourceMappingURL=Rent.css.map */

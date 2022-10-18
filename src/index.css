@@ -11,9 +11,10 @@ html {
   font-size: 22px;
   color: #fff;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
-  background-color: dodgerblue;
+  background-color: #393e46;
 }

@@ -2,20 +2,37 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import useAuth from "../../hooks/useAuth";
+import {
+  faCartShopping,
+  faHome,
+  faHeart,
+  faArrowRightToBracket,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useGeneral from "../../hooks/useGeneral";
 const Navbar = () => {
   const { auth } = useAuth();
+  const { cars, setCars } = useGeneral();
   return (
     <div className="navbar">
       <div className="nav-route">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">
+              <FontAwesomeIcon icon={faHome} /> Home
+            </Link>
           </li>
           <li>
-            <Link to="/rent">Rent</Link>
+            <Link to="/">
+              <FontAwesomeIcon icon={faCartShopping} /> My Cart
+            </Link>
           </li>
           <li>
-            <Link to="/favorites">Favorites</Link>
+            <FontAwesomeIcon
+              // onClick={setCars(car?.filter({}))}
+              icon={faHeart}
+            />
+            Favorites
           </li>
         </ul>
       </div>
