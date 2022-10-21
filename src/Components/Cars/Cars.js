@@ -1,11 +1,20 @@
+import { MotionConfig } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
-import useAuth from "../../hooks/useAuth";
+
 import useGeneral from "../../hooks/useGeneral";
 import Card from "./Card";
+import { motion } from "framer-motion";
 const Cars = () => {
-  const { auth } = useAuth();
-  const { cars, setCars, favorites, setFavorites } = useGeneral();
+  const {
+    auth,
+    cars,
+    setCars,
+    favorites,
+    setFavorites,
+    carsTemp,
+    setCarsTemp,
+  } = useGeneral();
 
   // Getting user favorites
   useEffect(() => {
@@ -18,12 +27,16 @@ const Cars = () => {
           setFavorites(response.data);
         }
       } catch (error) {
+        setFavorites();
         console.log(error);
       }
     };
     getFavs();
-    return () => {};
-  }, []);
+    return () => {
+      setFavorites();
+    };
+  }, [auth]);
+
   // Getting cars data
   useEffect(() => {
     const getCars = async () => {
@@ -32,6 +45,7 @@ const Cars = () => {
           withCredentials: true,
         });
         setCars(response.data.data);
+        setCarsTemp(response.data.data);
       } catch (error) {}
     };
     getCars();
@@ -55,7 +69,7 @@ const Cars = () => {
       />
     );
   });
-  return <div className="car-container">{carCard}</div>;
+  return <motion.div className="car-container">{carCard}</motion.div>;
 };
 
 export default Cars;

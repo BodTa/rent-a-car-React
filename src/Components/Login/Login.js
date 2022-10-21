@@ -1,7 +1,6 @@
 import "./Login.css";
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -9,8 +8,7 @@ import useGeneral from "../../hooks/useGeneral";
 const LOGIN_URL = "/auth/login";
 
 const Login = () => {
-  const { ToastContainer, toast } = useGeneral();
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, ToastContainer, toast } = useGeneral();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/"; //To locate the user to where he/she came from.
@@ -104,7 +102,7 @@ const Login = () => {
           value={password}
           required
         />
-        <button className="">Sign In</button>
+        <button className="sign-in">Sign In</button>
 
         <p>
           Need an Account? <br />

@@ -1,1 +1,31 @@
 /* Form already designed in Register.css no need to duplicate.*/
+.sign-in {
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s ease-in-out;
+}
+.sign-in::before {
+  position: absolute;
+  top: 0;
+  transition: 0.3s ease-in-out;
+  left: 0;
+  z-index: -1;
+  width: 10%;
+  height: 100%;
+  content: "";
+  border-radius: inherit;
+  background-color: #c7f2a4;
+}
+.sign-in:hover {
+  transform: scale(1.05);
+}
+.sign-in:hover::before {
+  width: 100%;
+}
+.line {
+  transition: 0.3s ease-in-out;
+}
+.line:hover {
+  transform: scale(1.05);
+  color: bisque;
+}

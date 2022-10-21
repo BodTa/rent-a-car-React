@@ -10,18 +10,17 @@ $fontSize: 0.7rem;
   font-size: $fontSize;
   @include flexCenter(row, grid);
   justify-content: space-between;
-  grid-template: auto auto / repeat(4, 1fr);
-  gap: 1rem;
+  grid-template: auto auto / repeat(5, 1fr);
+  gap: 0.8rem;
   .car-card {
+    width: 12rem;
+    height: 15rem;
     transition: 0.3s ease-in-out;
     &:hover {
       box-shadow: 0px 0px 10px 0.3px rgba(255, 255, 255, 0.605);
       transform: scale(1.05);
     }
     background: rgba(255, 255, 255, 0.26);
-    max-width: 320px;
-    height: 400px;
-
     padding: 0.8rem;
     @include flexCenter(column, flex);
     border-radius: 5%;
@@ -54,7 +53,7 @@ $fontSize: 0.7rem;
   }
   img {
     width: 100%;
-    height: 200px;
+    height: 7.6rem;
     object-fit: cover;
     transition: 0.3s ease;
     &:hover {
@@ -123,7 +122,7 @@ $fontSize: 0.7rem;
         }
       }
       .learn-more {
-        width: 7rem;
+        width: 80%;
         height: auto;
         .circle {
           transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
@@ -164,12 +163,13 @@ $fontSize: 0.7rem;
         .button-text {
           transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
           position: absolute;
+          font-size: 0.55rem;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          padding: 0.3rem 0;
-          margin: 0 0 0 1.85rem;
+          padding: 0.38rem 0;
+          margin: 0 0 0 1.5rem;
           color: #282936;
           font-weight: 700;
           line-height: 1.6;

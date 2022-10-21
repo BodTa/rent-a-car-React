@@ -10,14 +10,14 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  grid-template: auto auto/repeat(4, 1fr);
-  gap: 1rem;
+  grid-template: auto auto/repeat(5, 1fr);
+  gap: 0.8rem;
 }
 .car-container .car-card {
+  width: 12rem;
+  height: 15rem;
   transition: 0.3s ease-in-out;
   background: rgba(255, 255, 255, 0.26);
-  max-width: 320px;
-  height: 400px;
   padding: 0.8rem;
   display: flex;
   justify-content: center;
@@ -57,7 +57,7 @@
 }
 .car-container img {
   width: 100%;
-  height: 200px;
+  height: 7.6rem;
   -o-object-fit: cover;
      object-fit: cover;
   transition: 0.3s ease;
@@ -128,7 +128,7 @@
   color: #fff;
 }
 .car-container .card-buttons .buttons .learn-more {
-  width: 7rem;
+  width: 80%;
   height: auto;
 }
 .car-container .card-buttons .buttons .learn-more .circle {
@@ -170,12 +170,13 @@
 .car-container .card-buttons .buttons .learn-more .button-text {
   transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;
+  font-size: 0.55rem;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0.3rem 0;
-  margin: 0 0 0 1.85rem;
+  padding: 0.38rem 0;
+  margin: 0 0 0 1.5rem;
   color: #282936;
   font-weight: 700;
   line-height: 1.6;

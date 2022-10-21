@@ -8,6 +8,7 @@ import Rent from "./Components/Rent/Rent";
 import Unauthorized from "./Components/Unauthorized/Unauthorized";
 import Cars from "./Components/Cars/Cars";
 import CarInfo from "./Components/Cars/CarInfo/CarInfo";
+import Profile from "./Components/Profile/Profile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="carinfo/:id" element={<CarInfo />} />
         {/*Protected Routes */}
         <Route element={<RequireAuth allowedRoles={["user", "admin"]} />}>
+          <Route path="profile/:userId" element={<Profile />} />
           <Route path="rent/:id" element={<Rent />} />
         </Route>
       </Route>

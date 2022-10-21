@@ -21,31 +21,6 @@
   align-items: center;
   flex-direction: column;
 }
-.rent-container .car-sliders .img-container {
-  padding-left: 0.3rem;
-  overflow: hidden;
-  height: 30%;
-  width: 100%;
-}
-.rent-container .car-sliders .img-container .small-card-container {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  grid-template: repeat(2/1fr)/repeat(8/1fr);
-  justify-content: flex-start;
-}
-.rent-container .car-sliders .img-container .small-card-container .small-img-card {
-  cursor: pointer;
-  height: 90%;
-  width: 38%;
-}
-.rent-container .car-sliders .img-container .small-card-container .small-img-card img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
 .rent-container .car-sliders .car-slider {
   color: black;
   height: 75%;

@@ -1,0 +1,97 @@
+* {
+  transition: 0.3s ease-in-out;
+}
+
+.profile-container {
+  margin-top: 2rem;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background-color: rgba(0, 128, 0, 0.296);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+.profile-container .user-cars #goRight, .profile-container .user-cars #goLeft {
+  transform: translateY(-50%);
+  width: 5%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  background: none;
+  border: none;
+  border-radius: 0%;
+  transition: 0.5s linear;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+.profile-container .user-cars #goRight:hover, .profile-container .user-cars #goLeft:hover {
+  background: rgba(255, 255, 255, 0.25);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+}
+.profile-container .user-cars #goRight .icons, .profile-container .user-cars #goLeft .icons {
+  height: 35px;
+}
+.profile-container .user-info-container {
+  width: 100%;
+  height: 40vh;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.367);
+}
+.profile-container .user-cars {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  background-color: rgba(0, 0, 255, 0.233);
+  text-align: center;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  grid-template: repeat(1, 1fr)/auto;
+}
+.profile-container .user-cars .car-card {
+  background-color: rgba(255, 255, 0, 0.347);
+  width: 16rem;
+  height: 15rem;
+}
+.profile-container .user-cars .car-card .card-img {
+  transition: 0.3s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+.profile-container .user-cars .car-card .card-img img {
+  transition: 0.3s ease-in-out;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+.profile-container .user-cars .car-card .card-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.profile-container .user-cars .car-card .card-buttons button {
+  font-size: 0.8rem;
+  width: 45%;
+  margin: 0;
+  cursor: pointer;
+}
+.profile-container .user-cars .car-card .card-buttons button:hover {
+  transform: scale(1.1);
+}
+.profile-container .user-cars #goLeft {
+  left: 0;
+}
+.profile-container .user-cars #goRight {
+  right: 0;
+}/*# sourceMappingURL=Profile.css.map */

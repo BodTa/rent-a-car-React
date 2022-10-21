@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import "./Cars.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeartCirclePlus, faHeart } from "@fortawesome/free-solid-svg-icons";
-import useAuth from "../../hooks/useAuth";
+
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import useGeneral from "../../hooks/useGeneral";
+import { motion } from "framer-motion";
 const Card = (props) => {
-  const { ToastContainer, toast } = useGeneral();
-  const { auth } = useAuth();
+  const { auth, ToastContainer, toast } = useGeneral();
   const navigate = useNavigate();
   // Checking if car is in favs.
   const notify = () => {
@@ -66,7 +66,7 @@ const Card = (props) => {
     }
   };
   return (
-    <div>
+    <motion.div layout>
       <div className="car-card">
         <div className="card-img">
           <img src={props.imagePath} />
@@ -105,7 +105,7 @@ const Card = (props) => {
         </div>
       </div>
       <ToastContainer />
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,8 +1,8 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import useGeneral from "../../hooks/useGeneral";
 
 const RequireAuth = ({ allowedRoles }) => {
-  const { auth } = useAuth();
+  const { auth } = useGeneral();
   const location = useLocation();
   return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
     <Outlet /> // Email varsa istenilen yere gidicek

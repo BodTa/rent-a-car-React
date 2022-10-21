@@ -1,7 +1,7 @@
 import axios from "../api/axios";
-import useAuth from "./useAuth";
+import useGeneral from "./useGeneral";
 const useRefreshToken = () => {
-  const { setAuth } = useAuth();
+  const { setAuth } = useGeneral();
   const refresh = async () => {
     const response = await axios.get("/auth/refresh-token", {
       withCredentials: true,

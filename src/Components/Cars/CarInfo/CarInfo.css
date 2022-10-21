@@ -19,31 +19,6 @@
   align-items: center;
   flex-direction: column;
 }
-.carInfo-container .car-sliders .img-container {
-  padding-left: 0.3rem;
-  overflow: hidden;
-  height: 30%;
-  width: 100%;
-}
-.carInfo-container .car-sliders .img-container .small-card-container {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  grid-template: repeat(2/1fr)/repeat(8/1fr);
-  justify-content: flex-start;
-}
-.carInfo-container .car-sliders .img-container .small-card-container .small-img-card {
-  cursor: pointer;
-  height: 90%;
-  width: 38%;
-}
-.carInfo-container .car-sliders .img-container .small-card-container .small-img-card img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
 .carInfo-container .car-sliders .car-slider {
   color: black;
   height: 75%;
@@ -94,6 +69,33 @@
 }
 .carInfo-container .car-sliders .car-slider #goRight {
   right: 0;
+}
+.carInfo-container .img-container {
+  background-color: rgba(255, 255, 255, 0.288);
+  padding: 0.5rem;
+  overflow: hidden;
+  height: 30%;
+  width: 100%;
+}
+.carInfo-container .img-container .small-card-container {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  grid-template: repeat(2/1fr)/repeat(8/1fr);
+  justify-content: flex-start;
+}
+.carInfo-container .img-container .small-card-container .small-img-card {
+  cursor: pointer;
+  height: 3.2rem;
+  width: 3rem;
+}
+.carInfo-container .img-container .small-card-container .small-img-card img {
+  height: 3rem;
+  width: 4rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .carInfo-container .car-details {
   display: flex;

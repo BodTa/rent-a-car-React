@@ -8,12 +8,10 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 const Rent = () => {
   const { id } = useParams();
-  const { cars, ToastContainer, toast } = useGeneral();
-  const { auth } = useAuth();
+  const { cars, ToastContainer, toast, auth } = useGeneral();
   const car = cars.find(({ carId }) => carId == id);
   const [x, setX] = useState(0);
   const [rentDate, setRentDate] = useState("");

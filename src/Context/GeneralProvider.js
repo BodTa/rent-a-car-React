@@ -5,11 +5,24 @@ const GeneralContext = createContext({});
 
 export const GeneralProvider = ({ children }) => {
   const [cars, setCars] = useState([]);
+  const [carsTemp, setCarsTemp] = useState([]);
   const [favorites, setFavorites] = useState();
+  const [auth, setAuth] = useState();
 
   return (
     <GeneralContext.Provider
-      value={{ cars, setCars, favorites, setFavorites, ToastContainer, toast }}
+      value={{
+        carsTemp,
+        setCarsTemp,
+        cars,
+        setCars,
+        favorites,
+        setFavorites,
+        ToastContainer,
+        toast,
+        auth,
+        setAuth,
+      }}
     >
       {children}
     </GeneralContext.Provider>

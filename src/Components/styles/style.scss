@@ -10,27 +10,6 @@
     width: 100%;
     background-color: #222831;
     @include flexCenter(column, flex);
-    .img-container {
-      padding-left: 0.3rem;
-      overflow: hidden;
-      height: 30%;
-      width: 100%;
-      .small-card-container {
-        @include flexCenter(row, grid);
-        grid-template: repeat(2/1fr) / repeat(8/1fr);
-        justify-content: flex-start;
-        .small-img-card {
-          cursor: pointer;
-          height: 90%;
-          width: 38%;
-          img {
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-          }
-        }
-      }
-    }
     .car-slider {
       color: black;
       height: 75%;
