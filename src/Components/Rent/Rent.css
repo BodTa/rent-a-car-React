@@ -75,6 +75,33 @@
 .rent-container .car-sliders {
   width: 60%;
 }
+.rent-container .car-sliders .img-container {
+  background-color: rgba(255, 255, 255, 0.288);
+  padding: 0.5rem;
+  overflow: hidden;
+  height: 30%;
+  width: 100%;
+}
+.rent-container .car-sliders .img-container .small-card-container {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  grid-template: repeat(2/1fr)/repeat(8/1fr);
+  justify-content: flex-start;
+}
+.rent-container .car-sliders .img-container .small-card-container .small-img-card {
+  cursor: pointer;
+  height: 3.2rem;
+  width: 3rem;
+}
+.rent-container .car-sliders .img-container .small-card-container .small-img-card img {
+  height: 3rem;
+  width: 4rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 
 .rent-form {
   padding: 1rem;
@@ -115,7 +142,6 @@
   left: 0;
   content: "";
   width: 0%;
-  background-color: #3a4750;
 }
 .rent-form button:hover::before {
   width: 100%;

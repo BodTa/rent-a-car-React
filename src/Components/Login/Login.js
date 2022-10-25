@@ -45,7 +45,13 @@ const Login = () => {
         decodedToken[
           "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ];
-      setAuth({ roles, email, password, accessToken, userId });
+      setAuth({
+        roles: roles,
+        email: email,
+        password: password,
+        accessToken: accessToken,
+        userId: userId,
+      });
       setEmail("");
       setPassword("");
       navigate(from, { replace: true });

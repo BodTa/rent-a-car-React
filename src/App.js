@@ -20,8 +20,8 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="carinfo/:id" element={<CarInfo />} />
         {/*Protected Routes */}
-        <Route element={<RequireAuth allowedRoles={["user", "admin"]} />}>
-          <Route path="profile/:userId" element={<Profile />} />
+        <Route element={<RequireAuth allowedRoles={["user"]} />}>
+          <Route path="profile/:sellerId" element={<Profile />} />
           <Route path="rent/:id" element={<Rent />} />
         </Route>
       </Route>

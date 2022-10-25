@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGeneral from "../../hooks/useGeneral";
@@ -73,7 +73,6 @@ const Rent = () => {
       notify("error", error.response.data.message);
     }
   };
-
   return (
     <div className="rent-container">
       <div className="car-sliders">
@@ -137,7 +136,7 @@ const Rent = () => {
           }}
           required
         />
-        <button className="form-rent">Rent the Car!</button>
+        {<button className="form-rent">Rent the Car!</button>}
       </form>
       <ToastContainer />
     </div>

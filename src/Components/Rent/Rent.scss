@@ -11,6 +11,29 @@
   @include carSlider();
   .car-sliders {
     width: 60%;
+    .img-container {
+      background-color: rgba(255, 255, 255, 0.288);
+      padding: 0.5rem;
+      overflow: hidden;
+      height: 30%;
+      width: 100%;
+      .small-card-container {
+        width: 100%;
+        @include flexCenter(row, grid);
+        grid-template: repeat(2/1fr) / repeat(8/1fr);
+        justify-content: flex-start;
+        .small-img-card {
+          cursor: pointer;
+          height: 3.2rem;
+          width: 3rem;
+          img {
+            height: 3rem;
+            width: 4rem;
+            object-fit: cover;
+          }
+        }
+      }
+    }
   }
 }
 .rent-form {

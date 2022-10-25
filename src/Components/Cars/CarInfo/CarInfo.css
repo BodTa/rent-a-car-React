@@ -187,6 +187,8 @@
   border: 2px solid black;
   background: none;
   transition: 0.3s ease-in-out;
+  font-size: 0.9rem;
+  height: 2rem;
 }
 .carInfo-container .car-details .details-footer button::before {
   z-index: -1;
@@ -199,13 +201,48 @@
   left: 0;
   content: "";
   width: 0%;
-  background-color: #3a4750;
 }
 .carInfo-container .car-details .details-footer button:hover::before {
   width: 100%;
 }
 .carInfo-container .car-details .details-footer button:hover {
   transform: scale(1.1);
+}
+.carInfo-container .car-details .details-footer .rent-btn {
+  border: 3.2px dotted rgba(17, 157, 161, 0.4196078431);
+}
+.carInfo-container .car-details .details-footer .rent-btn::before {
+  background-color: rgba(17, 157, 161, 0.4196078431);
+}
+.carInfo-container .car-details .details-footer .rent-btn:hover {
+  border: none;
+}
+.carInfo-container .car-details .details-footer .seller-btn {
+  border: 3.2px dotted rgba(63, 113, 175, 0.4196078431);
+}
+.carInfo-container .car-details .details-footer .seller-btn::before {
+  background-color: rgba(63, 113, 175, 0.4196078431);
+}
+.carInfo-container .car-details .details-footer .seller-btn:hover {
+  border: none;
+}
+.carInfo-container .car-details .details-footer .delete-btn {
+  border: 3.2px dotted rgba(232, 69, 69, 0.4745098039);
+}
+.carInfo-container .car-details .details-footer .delete-btn::before {
+  background-color: rgba(232, 69, 69, 0.4745098039);
+}
+.carInfo-container .car-details .details-footer .delete-btn:hover {
+  border: none;
+}
+.carInfo-container .car-details .details-footer .edit-btn {
+  border: 3.2px dotted rgba(255, 222, 125, 0.3725490196);
+}
+.carInfo-container .car-details .details-footer .edit-btn::before {
+  background-color: rgba(255, 222, 125, 0.3725490196);
+}
+.carInfo-container .car-details .details-footer .edit-btn:hover {
+  border: none;
 }
 .carInfo-container .car-details {
   z-index: 88;

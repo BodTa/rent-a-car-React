@@ -86,7 +86,28 @@ button {
 .line {
   display: inline-block;
 }
+.sign-up {
+  position: relative;
+  border: 3.2px dotted #c7f2a4;
+
+  background: none;
+}
 .sign-up:hover {
   opacity: 0.8;
   transition: 0.3s ease;
+}
+.sign-up::before {
+  width: 0;
+  top: 0;
+  height: 100%;
+  content: "";
+  left: 0;
+  position: absolute;
+  border-radius: inherit;
+  z-index: -1;
+  background-color: #c7f2a4;
+  transition: 0.3s ease-in-out;
+}
+.sign-up:hover::before {
+  width: 100%;
 }

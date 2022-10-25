@@ -9,33 +9,48 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./Profile.css";
 import UserCarCard from "./UserCarCard";
+import UserProfile from "./UserProfile";
 const Profile = () => {
-  const { userId } = useParams();
+  const { sellerId } = useParams();
+  const { auth } = useGeneral();
   const [cars, setCars] = useState();
-  const [userData, setUserData] = useState();
+  const [sellerData, setSellerData] = useState();
+  const [isSeller, setIsSeller] = useState(false);
   const [x, setX] = useState(0);
   useEffect(() => {
     const handleUserInfos = async () => {
-      const response = await axios.get(`/users/getbyid?id=${userId}`, {
+      const response = await axios.get(`/users/getbyid?id=${sellerId}`, {
         withCredentials: true,
       });
-      setUserData(response.data.data);
+      setSellerData(response.data.data);
     };
     handleUserInfos();
-    return () => {};
+    return () => {
+      setSellerData();
+    };
   }, []);
   useEffect(() => {
     const handleCars = async () => {
-      const response = await axios.get(`/cars/getcarsbysellerid?id=${userId}`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        `/cars/getcarsbysellerid?id=${sellerId}`,
+        {
+          withCredentials: true,
+        }
+      );
       setCars(response.data.data);
     };
     handleCars();
 
-    return () => {};
+    return () => {
+      setCars();
+    };
   }, []);
-
+  useEffect(() => {
+    setIsSeller(cars?.some(({ sellerId }) => sellerId === auth?.userId));
+    return () => {
+      setIsSeller(false);
+    };
+  }, [cars]);
   const goLeft = () => {
     x === 0 ? setX(-100 * (cars?.length - 1)) : setX(x + 200);
   };
@@ -54,16 +69,20 @@ const Profile = () => {
           brandName={car.brandName}
           carName={car.carName}
           x={x}
+          isSeller={isSeller}
           carId={car.carId}
           imagePath={"http://localhost:5149" + car.images[0].imagePath}
         />
       </div>
     );
   });
-
   return (
     <div className="profile-container">
-      <div className="user-info-container"> User's infos</div>
+      <UserProfile
+        firstName={sellerData?.firstName}
+        lastName={sellerData?.lastName}
+        email={sellerData?.email}
+      />
       <div className="user-cars">
         {carCard}
         <button id="goLeft" onClick={goLeft}>

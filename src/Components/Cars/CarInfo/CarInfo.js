@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useGeneral from "../../../hooks/useGeneral";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,11 +17,11 @@ import {} from "@fortawesome/free-regular-svg-icons";
 import "./CarInfo.css";
 const CarInfo = () => {
   const { id } = useParams();
-  const { cars } = useGeneral();
+  const { cars, auth } = useGeneral();
   const [x, setX] = useState(0);
   const navigate = useNavigate();
   const car = cars.find(({ carId }) => carId == id);
-
+  const [isSeller, setIsSeller] = useState(false);
   const carImages = car?.images;
   const goLeft = () => {
     x === 0 ? setX(-100 * (carImages?.length - 1)) : setX(x + 100);
@@ -33,6 +33,12 @@ const CarInfo = () => {
     setX(0);
     setX(-100 * index);
   };
+  useEffect(() => {
+    setIsSeller(car?.sellerId === auth?.userId);
+    return () => {
+      setIsSeller(false);
+    };
+  }, [car]);
   return (
     <div className="carInfo-container">
       <div className="car-sliders">
@@ -129,17 +135,32 @@ const CarInfo = () => {
             <hr />
           </div>
         </div>
-        <div className="details-footer">
-          <button className="seller-btn">See the Seller</button>
-          <button
-            onClick={() => {
-              navigate(`/rent/${id}`);
-            }}
-            className="rent-btn"
-          >
-            Rent!
-          </button>
-        </div>
+        {!isSeller && (
+          <div className="details-footer">
+            <button
+              onClick={() => {
+                navigate(`/profile/${car?.sellerId}`);
+              }}
+              className="seller-btn"
+            >
+              Review the Seller
+            </button>
+            <button
+              onClick={() => {
+                navigate(`/rent/${id}`);
+              }}
+              className="rent-btn"
+            >
+              Rent!
+            </button>
+          </div>
+        )}
+        {isSeller && (
+          <div className="details-footer">
+            <button className="delete-btn">Stop Renting</button>
+            <button className="edit-btn">Edit</button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -4,12 +4,12 @@ import {
   faCheck,
   faTimes,
   faInfoCircle,
-  faC,
 } from "@fortawesome/free-solid-svg-icons";
 import jwt_decode from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
 import { Link } from "react-router-dom";
+import useGeneral from "../../hooks/useGeneral";
 
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{3,4}$/;
 const PASSWORD_REGEX =
@@ -19,6 +19,7 @@ const REGISTER_URL = "/Auth/register";
 const Register = () => {
   const firstNameRef = useRef();
   const errRef = useRef();
+  const { setAuth } = useGeneral();
 
   const [email, setEmail] = useState("");
   const [validEmail, setvalidEmail] = useState(false);
@@ -105,7 +106,17 @@ const Register = () => {
         decodedToken[
           "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
         ];
-      console.log(roles);
+      const userId =
+        decodedToken[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+        ];
+      setAuth({
+        roles: roles,
+        email: email,
+        password: password,
+        accessToken: accessToken,
+        userId: userId,
+      });
       setSuccess(true);
     } catch (error) {
       if (!error.response) {

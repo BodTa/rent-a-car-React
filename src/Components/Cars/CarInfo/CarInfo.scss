@@ -90,6 +90,44 @@
       justify-content: space-around;
       button {
         @include buttonStyle();
+        font-size: 0.9rem;
+        height: 2rem;
+      }
+      .rent-btn {
+        border: 3.2px dotted #119da16b;
+        &::before {
+          background-color: #119da16b;
+        }
+        &:hover {
+          border: none;
+        }
+      }
+      .seller-btn {
+        border: 3.2px dotted #3f71af6b;
+        &::before {
+          background-color: #3f71af6b;
+        }
+        &:hover {
+          border: none;
+        }
+      }
+      .delete-btn {
+        border: 3.2px dotted #e8454579;
+        &::before {
+          background-color: #e8454579;
+        }
+        &:hover {
+          border: none;
+        }
+      }
+      .edit-btn {
+        border: 3.2px dotted #ffde7d5f;
+        &::before {
+          background-color: #ffde7d5f;
+        }
+        &:hover {
+          border: none;
+        }
       }
     }
   }

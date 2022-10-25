@@ -1,7 +1,3 @@
-* {
-  transition: 0.3s ease-in-out;
-}
-
 .profile-container {
   margin-top: 2rem;
   width: 100%;
@@ -13,6 +9,9 @@
   align-items: center;
   flex-direction: column;
   row-gap: 1rem;
+}
+.profile-container * {
+  transition: 0.3s ease-in-out;
 }
 .profile-container .user-cars #goRight, .profile-container .user-cars #goLeft {
   transform: translateY(-50%);
@@ -39,14 +38,31 @@
 .profile-container .user-info-container {
   width: 100%;
   height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   text-align: center;
   background-color: rgba(255, 0, 0, 0.367);
+}
+.profile-container .user-info-container .user-info-img {
+  width: 30%;
+  height: 40vh;
+}
+.profile-container .user-info-container .user-info {
+  width: 70%;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 .profile-container .user-cars {
   position: relative;
   width: 100%;
   height: 60vh;
-  background-color: rgba(0, 0, 255, 0.233);
   text-align: center;
   display: flex;
   justify-content: flex-start;
@@ -56,7 +72,6 @@
   grid-template: repeat(1, 1fr)/auto;
 }
 .profile-container .user-cars .car-card {
-  background-color: rgba(255, 255, 0, 0.347);
   width: 16rem;
   height: 15rem;
 }
@@ -72,7 +87,18 @@
   -o-object-fit: fill;
      object-fit: fill;
 }
-.profile-container .user-cars .car-card .card-buttons {
+.profile-container .user-cars .car-card .card-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.profile-container .user-cars .car-card .card-footer .card-title {
+  font-size: 1rem;
+}
+.profile-container .user-cars .car-card .card-footer .card-buttons {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -80,14 +106,50 @@
   flex-direction: row;
   justify-content: space-evenly;
 }
-.profile-container .user-cars .car-card .card-buttons button {
+.profile-container .user-cars .car-card .card-footer .card-buttons button {
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  padding: 0;
+  font-size: 1rem;
+  height: 50%;
+  width: 40%;
+  border-radius: 0.5rem;
+  border: 2px solid black;
+  background: none;
+  transition: 0.3s ease-in-out;
   font-size: 0.8rem;
   width: 45%;
   margin: 0;
-  cursor: pointer;
 }
-.profile-container .user-cars .car-card .card-buttons button:hover {
+.profile-container .user-cars .car-card .card-footer .card-buttons button::before {
+  z-index: -1;
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 0%;
+}
+.profile-container .user-cars .car-card .card-footer .card-buttons button:hover::before {
+  width: 100%;
+}
+.profile-container .user-cars .car-card .card-footer .card-buttons button:hover {
   transform: scale(1.1);
+}
+.profile-container .user-cars .car-card .card-footer .card-buttons .rent-btn {
+  width: 10rem;
+}
+.profile-container .user-cars .car-card .card-footer .card-buttons .rent-btn::before {
+  background-color: rgba(17, 157, 161, 0.4196078431);
+}
+.profile-container .user-cars .car-card .card-footer .card-buttons .stp-rent-btn::before {
+  background-color: rgba(232, 69, 69, 0.4745098039);
+}
+.profile-container .user-cars .car-card .card-footer .card-buttons .edit-btn::before {
+  background-color: rgba(255, 222, 125, 0.3725490196);
 }
 .profile-container .user-cars #goLeft {
   left: 0;
