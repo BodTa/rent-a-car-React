@@ -15,6 +15,8 @@ const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{3,4}$/;
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const NAME_REGEX = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+const PHONENUMBER_REGEX =
+  /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 const REGISTER_URL = "/Auth/register";
 const Register = () => {
   const firstNameRef = useRef();
@@ -24,6 +26,10 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [validEmail, setvalidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
+
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [validPhoneNumber, setValidPhoneNumber] = useState(false);
+  const [phoneNumberFocus, setPhoneNumberFocus] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [validFistName, setvalidFirstName] = useState(false);
@@ -72,7 +78,11 @@ const Register = () => {
     const result = NAME_REGEX.test(lastName);
     setvalidLastName(result);
   }, [lastName]);
-
+  // For Phone Number
+  useEffect(() => {
+    const result = PHONENUMBER_REGEX.test(phoneNumber);
+    setValidPhoneNumber(result);
+  }, [phoneNumber]);
   // For Err Message
   useEffect(() => {
     setErrMsg("");
@@ -93,6 +103,7 @@ const Register = () => {
           FirstName: firstName,
           LastName: lastName,
           Email: email,
+          PhoneNumber: phoneNumber,
           Password: password,
         }),
         {
@@ -127,6 +138,22 @@ const Register = () => {
 
       errRef.current.focus();
     }
+  };
+  const handleInput = (e) => {
+    const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+    setPhoneNumber(formattedPhoneNumber);
+  };
+  const formatPhoneNumber = (value) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, "");
+    if (phoneNumber.length < 4) return phoneNumber;
+    if (phoneNumber.length < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    }
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+      3,
+      6
+    )}-${phoneNumber.slice(6, 10)}`;
   };
 
   return (
@@ -240,7 +267,43 @@ const Register = () => {
           <br />
           Example: example@gmail.com
         </p>
-
+        {/* Phone input section*/}
+        <label htmlFor="phoneNumber">
+          Phone Number:
+          <span className={validPhoneNumber ? "valid" : "hide"}>
+            <FontAwesomeIcon icon={faCheck} />
+          </span>
+          <span
+            className={validPhoneNumber || !phoneNumber ? "hide" : "invalid"}
+          >
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
+        </label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          autoComplete="off"
+          placeholder="(535) 555-5555"
+          onChange={(e) => handleInput(e)}
+          value={phoneNumber}
+          required
+          aria-invalid={validPhoneNumber ? "false" : "true"}
+          aria-describedby="uidnote"
+          onFocus={() => setPhoneNumberFocus(true)}
+          onBlur={() => setPhoneNumberFocus(false)}
+        />
+        <p
+          id="uidnote"
+          className={
+            phoneNumberFocus && phoneNumber && !validPhoneNumber
+              ? "instructions"
+              : "offscreen"
+          }
+        >
+          <FontAwesomeIcon icon={faInfoCircle} />
+          Please enter a valid phone number.
+          <br />
+        </p>
         {/*Password input section */}
         <label htmlFor="password">
           Password:

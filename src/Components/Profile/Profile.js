@@ -10,6 +10,7 @@ import {
 import "./Profile.css";
 import UserCarCard from "./UserCarCard";
 import UserProfile from "./UserProfile";
+import logo from "./logo.png";
 const Profile = () => {
   const { sellerId } = useParams();
   const { auth } = useGeneral();
@@ -19,10 +20,13 @@ const Profile = () => {
   const [x, setX] = useState(0);
   useEffect(() => {
     const handleUserInfos = async () => {
-      const response = await axios.get(`/users/getbyid?id=${sellerId}`, {
-        withCredentials: true,
-      });
-      setSellerData(response.data.data);
+      const response = await axios.get(
+        `/users/detailsbyuserid?id=${sellerId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      setSellerData(response.data);
     };
     handleUserInfos();
     return () => {
@@ -82,6 +86,11 @@ const Profile = () => {
         firstName={sellerData?.firstName}
         lastName={sellerData?.lastName}
         email={sellerData?.email}
+        imagePath={
+          sellerData?.userPicture == null
+            ? logo
+            : "http://localhost:5149" + sellerData?.userPicture?.imagePath
+        }
       />
       <div className="user-cars">
         {carCard}

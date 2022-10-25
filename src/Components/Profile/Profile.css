@@ -1,9 +1,8 @@
 .profile-container {
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   text-align: center;
-  background-color: rgba(0, 128, 0, 0.296);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,22 +36,30 @@
 }
 .profile-container .user-info-container {
   width: 100%;
-  height: 40vh;
+  height: 23vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   justify-content: space-evenly;
   text-align: center;
-  background-color: rgba(255, 0, 0, 0.367);
+  background-color: rgba(34, 40, 49, 0.8235294118);
 }
 .profile-container .user-info-container .user-info-img {
-  width: 30%;
-  height: 40vh;
+  border-radius: 50%;
+  width: 23vh;
+  height: 21vh;
+  overflow: hidden;
+}
+.profile-container .user-info-container .user-info-img .user-profile-img {
+  width: 100%;
+  height: 21vh;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .profile-container .user-info-container .user-info {
   width: 70%;
-  height: 40vh;
+  height: 25vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,9 +90,9 @@
 .profile-container .user-cars .car-card .card-img img {
   transition: 0.3s ease-in-out;
   width: 100%;
-  height: 100%;
-  -o-object-fit: fill;
-     object-fit: fill;
+  height: 90%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .profile-container .user-cars .car-card .card-footer {
   width: 100%;

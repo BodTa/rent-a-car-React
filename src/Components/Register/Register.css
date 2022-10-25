@@ -25,6 +25,7 @@ a:visited {
 input[type="email"],
 input[type="password"],
 input[type="text"],
+input[type="tel"],
 button,
 textarea {
   font-family: "Nunito", sans-serif;
@@ -88,13 +89,15 @@ button {
 }
 .sign-up {
   position: relative;
+  color: whitesmoke;
+  transition: 0.3s ease;
   border: 3.2px dotted #c7f2a4;
 
   background: none;
 }
 .sign-up:hover {
+  color: black;
   opacity: 0.8;
-  transition: 0.3s ease;
 }
 .sign-up::before {
   width: 0;

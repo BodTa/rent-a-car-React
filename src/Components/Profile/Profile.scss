@@ -4,6 +4,10 @@
   * {
     transition: 0.3s ease-in-out;
   }
+  margin-top: 1rem;
+  width: 100%;
+  height: 90vh;
+  text-align: center;
   %btn-styles {
     transform: translateY(-50%);
     width: 5%;
@@ -24,27 +28,30 @@
       height: 35px;
     }
   }
-  margin-top: 2rem;
-  width: 100%;
-  height: 100vh;
-  text-align: center;
-  background-color: rgba(0, 128, 0, 0.296);
+
   @include flexCenter(column, flex);
   row-gap: 1rem;
   .user-info-container {
     width: 100%;
-    height: 40vh;
+    height: 23vh;
     @include flexCenter(row, flex);
     justify-content: space-evenly;
     text-align: center;
-    background-color: rgba(255, 0, 0, 0.367);
+    background-color: #222831d2;
     .user-info-img {
-      width: 30%;
-      height: 40vh;
+      border-radius: 50%;
+      width: 23vh;
+      height: 21vh;
+      overflow: hidden;
+      .user-profile-img {
+        width: 100%;
+        height: 21vh;
+        object-fit: cover;
+      }
     }
     .user-info {
       width: 70%;
-      height: 40vh;
+      height: 25vh;
       @include flexCenter(column, flex);
       justify-content: space-evenly;
     }
@@ -69,8 +76,8 @@
         img {
           transition: 0.3s ease-in-out;
           width: 100%;
-          height: 100%;
-          object-fit: fill;
+          height: 90%;
+          object-fit: cover;
         }
       }
       .card-footer {

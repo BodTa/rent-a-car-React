@@ -41,10 +41,11 @@ const Login = () => {
       const userId = userResponse.data.data.userId;
       const accessToken = response.data.accessToken.token;
       const decodedToken = await jwt_decode(accessToken);
-      const roles =
+      const roles = [].concat(
         decodedToken[
           "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-        ];
+        ]
+      );
       setAuth({
         roles: roles,
         email: email,
@@ -74,6 +75,7 @@ const Login = () => {
       theme: "dark",
     });
   };
+  console.log(auth);
   return (
     <section onSubmit={handleSubmit}>
       <ToastContainer />
