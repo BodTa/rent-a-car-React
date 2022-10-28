@@ -5,6 +5,8 @@
 <p align="center">**************************</p>
 <p align="center">axios</p>
 <p align="center">react-tostify</p>
+<p align="center">Lazy loading</p>
+<p align="center">react-spinners</p>
 <p align="center">SASS</p>
 <p align="center">framer-motion</p>
 <p align="center">fontawesome</p>
