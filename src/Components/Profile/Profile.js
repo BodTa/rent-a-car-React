@@ -13,7 +13,7 @@ import UserProfile from "./UserProfile";
 import logo from "./logo.png";
 const Profile = () => {
   const { sellerId } = useParams();
-  const { auth } = useGeneral();
+  const { auth, isDark } = useGeneral();
   const [cars, setCars] = useState();
   const [sellerData, setSellerData] = useState();
   const [isSeller, setIsSeller] = useState(false);
@@ -32,7 +32,7 @@ const Profile = () => {
     return () => {
       setSellerData();
     };
-  }, []);
+  }, [sellerId]);
   useEffect(() => {
     const handleCars = async () => {
       const response = await axios.get(
@@ -48,7 +48,7 @@ const Profile = () => {
     return () => {
       setCars();
     };
-  }, []);
+  }, [sellerId]);
   useEffect(() => {
     setIsSeller(cars?.some(({ sellerId }) => sellerId === auth?.userId));
     return () => {
@@ -72,6 +72,7 @@ const Profile = () => {
         <UserCarCard
           brandName={car.brandName}
           carName={car.carName}
+          dailyPrice={car.dailyPrice}
           x={x}
           isSeller={isSeller}
           carId={car.carId}
@@ -81,11 +82,18 @@ const Profile = () => {
     );
   });
   return (
-    <div className="profile-container">
+    <div
+      className={
+        isDark
+          ? "profile-container dark-theme"
+          : "profile-container light-theme"
+      }
+    >
       <UserProfile
         firstName={sellerData?.firstName}
         lastName={sellerData?.lastName}
         email={sellerData?.email}
+        telNumber={sellerData?.telNumber}
         imagePath={
           sellerData?.userPicture == null
             ? logo

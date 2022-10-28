@@ -1,3 +1,8 @@
-.App {
+.App.dark-theme {
   background-color: #393e46;
+  transition: 0.5s ease-in-out;
+}
+.App.light-theme {
+  background-color: #f4e8d1;
+  transition: 0.5s ease-in-out;
 }

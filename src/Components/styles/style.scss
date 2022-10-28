@@ -4,11 +4,15 @@
   align-items: center;
   flex-direction: $direction;
 }
+$light-darkColor: #7b7467;
+$light-lightColor: #cdc2ae;
+$dark-darkColor: #191d24;
+$dark-lightColor: #222831;
 @mixin carSlider() {
   .car-sliders {
     height: 80vh;
     width: 100%;
-    background-color: #222831;
+    background-color: $dark-darkColor;
     @include flexCenter(column, flex);
     .car-slider {
       color: black;

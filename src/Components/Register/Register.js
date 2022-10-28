@@ -8,28 +8,29 @@ import {
 import jwt_decode from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGeneral from "../../hooks/useGeneral";
 
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{3,4}$/;
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const NAME_REGEX = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-const PHONENUMBER_REGEX =
+const TELNUMBER_REGEX =
   /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 const REGISTER_URL = "/Auth/register";
 const Register = () => {
   const firstNameRef = useRef();
   const errRef = useRef();
   const { setAuth } = useGeneral();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [validEmail, setvalidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
 
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [validPhoneNumber, setValidPhoneNumber] = useState(false);
-  const [phoneNumberFocus, setPhoneNumberFocus] = useState(false);
+  const [telNumber, setTelNumber] = useState("");
+  const [validTelNumber, SetValidTelNumber] = useState(false);
+  const [telNumberFocus, setTelNumberFocus] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [validFistName, setvalidFirstName] = useState(false);
@@ -80,9 +81,9 @@ const Register = () => {
   }, [lastName]);
   // For Phone Number
   useEffect(() => {
-    const result = PHONENUMBER_REGEX.test(phoneNumber);
-    setValidPhoneNumber(result);
-  }, [phoneNumber]);
+    const result = TELNUMBER_REGEX.test(telNumber);
+    SetValidTelNumber(result);
+  }, [telNumber]);
   // For Err Message
   useEffect(() => {
     setErrMsg("");
@@ -103,7 +104,7 @@ const Register = () => {
           FirstName: firstName,
           LastName: lastName,
           Email: email,
-          PhoneNumber: phoneNumber,
+          TelNumber: telNumber,
           Password: password,
         }),
         {
@@ -129,6 +130,7 @@ const Register = () => {
         userId: userId,
       });
       setSuccess(true);
+      navigate("/");
     } catch (error) {
       if (!error.response) {
         setErrMsg("No Server Response");
@@ -141,7 +143,7 @@ const Register = () => {
   };
   const handleInput = (e) => {
     const formattedPhoneNumber = formatPhoneNumber(e.target.value);
-    setPhoneNumber(formattedPhoneNumber);
+    setTelNumber(formattedPhoneNumber);
   };
   const formatPhoneNumber = (value) => {
     if (!value) return value;
@@ -270,12 +272,10 @@ const Register = () => {
         {/* Phone input section*/}
         <label htmlFor="phoneNumber">
           Phone Number:
-          <span className={validPhoneNumber ? "valid" : "hide"}>
+          <span className={validTelNumber ? "valid" : "hide"}>
             <FontAwesomeIcon icon={faCheck} />
           </span>
-          <span
-            className={validPhoneNumber || !phoneNumber ? "hide" : "invalid"}
-          >
+          <span className={validTelNumber || !telNumber ? "hide" : "invalid"}>
             <FontAwesomeIcon icon={faTimes} />
           </span>
         </label>
@@ -285,17 +285,17 @@ const Register = () => {
           autoComplete="off"
           placeholder="(535) 555-5555"
           onChange={(e) => handleInput(e)}
-          value={phoneNumber}
+          value={telNumber}
           required
-          aria-invalid={validPhoneNumber ? "false" : "true"}
+          aria-invalid={validTelNumber ? "false" : "true"}
           aria-describedby="uidnote"
-          onFocus={() => setPhoneNumberFocus(true)}
-          onBlur={() => setPhoneNumberFocus(false)}
+          onFocus={() => setTelNumberFocus(true)}
+          onBlur={() => setTelNumberFocus(false)}
         />
         <p
           id="uidnote"
           className={
-            phoneNumberFocus && phoneNumber && !validPhoneNumber
+            telNumberFocus && telNumber && !validTelNumber
               ? "instructions"
               : "offscreen"
           }

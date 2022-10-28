@@ -14,7 +14,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useGeneral from "../../hooks/useGeneral";
 const Navbar = () => {
-  const { auth, setAuth, cars, setCars, favorites, setFavorites, carsTemp } =
+  const { auth, setAuth, setCars, favorites, carsTemp, isDark, setIsDark } =
     useGeneral();
   const [isActive, setIsActive] = useState(false);
   const handleClick = () => {
@@ -26,8 +26,13 @@ const Navbar = () => {
       });
     }
   };
+  const handleTheme = () => {
+    console.log(!isDark);
+    localStorage.setItem("isDark", !isDark);
+    setIsDark(!isDark);
+  };
   return (
-    <div className="navbar">
+    <div className={isDark ? "navbar dark-theme" : "navbar light-theme"}>
       <div className="nav-route">
         <ul>
           <li onClick={() => setCars(carsTemp)}>
@@ -56,6 +61,16 @@ const Navbar = () => {
         {!auth?.accessToken && (
           <ul>
             <li>
+              <label className="switch">
+                <input type="checkbox" onChange={handleTheme} />
+                <span
+                  className={
+                    isDark ? "slider dark-theme" : "slider light-theme"
+                  }
+                ></span>
+              </label>
+            </li>
+            <li>
               <Link to="/login">Sign In</Link>
             </li>
             <li>
@@ -66,9 +81,9 @@ const Navbar = () => {
         {auth?.accessToken && (
           <ul>
             <li>
-              <h5>{auth.email}</h5>
+              <h5>{auth?.email}</h5>
             </li>
-            <li className="navbar">
+            <li className="dropdown">
               {!isActive && (
                 <div>
                   <FontAwesomeIcon
@@ -85,8 +100,18 @@ const Navbar = () => {
                     icon={faCaretDown}
                     onClick={() => setIsActive(false)}
                   />
-                  <ul className="navbar-container">
-                    <li className="navbar-logout" onClick={() => setAuth()}>
+                  <ul className="dropdown-container">
+                    <li>
+                      <label className="switch">
+                        <input type="checkbox" onChange={handleTheme} />
+                        <span
+                          className={
+                            isDark ? "slider dark-theme" : "slider light-theme"
+                          }
+                        ></span>
+                      </label>
+                    </li>
+                    <li className="dropdown-logout" onClick={() => setAuth()}>
                       <FontAwesomeIcon icon={faArrowRightToBracket} />
                       Log Out
                     </li>

@@ -17,7 +17,7 @@ import {} from "@fortawesome/free-regular-svg-icons";
 import "./CarInfo.css";
 const CarInfo = () => {
   const { id } = useParams();
-  const { cars, auth } = useGeneral();
+  const { cars, auth, isDark } = useGeneral();
   const [x, setX] = useState(0);
   const navigate = useNavigate();
   const car = cars.find(({ carId }) => carId == id);
@@ -40,7 +40,13 @@ const CarInfo = () => {
     };
   }, [car]);
   return (
-    <div className="carInfo-container">
+    <div
+      className={
+        isDark
+          ? "carInfo-container dark-theme"
+          : "carInfo-container light-theme"
+      }
+    >
       <div className="car-sliders">
         <div className="car-slider">
           {carImages?.map((image, index) => {

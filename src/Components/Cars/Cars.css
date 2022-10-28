@@ -182,4 +182,10 @@
   line-height: 1.6;
   text-align: center;
   text-transform: uppercase;
+}
+.car-container .car-card.dark-theme {
+  background: rgba(255, 255, 255, 0.26);
+}
+.car-container .car-card.light-theme {
+  background-color: #cdc2ae;
 }/*# sourceMappingURL=Cars.css.map */

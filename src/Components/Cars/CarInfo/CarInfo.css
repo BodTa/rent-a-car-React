@@ -13,7 +13,7 @@
 .carInfo-container .car-sliders {
   height: 80vh;
   width: 100%;
-  background-color: #222831;
+  background-color: #191d24;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +71,6 @@
   right: 0;
 }
 .carInfo-container .img-container {
-  background-color: rgba(255, 255, 255, 0.288);
   padding: 0.5rem;
   overflow: hidden;
   height: 30%;
@@ -110,13 +109,11 @@
 .carInfo-container .car-details .details-header {
   width: 100%;
   height: 8%;
-  background-color: #222831;
   border-bottom: 3px solid #767676;
 }
 .carInfo-container .car-details .details {
   width: 100%;
   height: 75%;
-  background-color: #191d24;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -169,7 +166,6 @@
 .carInfo-container .car-details .details-footer {
   width: 100%;
   height: 18%;
-  background-color: #191d24;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -246,4 +242,42 @@
 }
 .carInfo-container .car-details {
   z-index: 88;
+}
+
+.carInfo-container.dark-theme * {
+  transition: 0.5s ease-in-out;
+}
+.carInfo-container.dark-theme .car-details {
+  background-color: #191d24;
+}
+.carInfo-container.dark-theme .car-sliders {
+  background-color: #191d24;
+}
+.carInfo-container.dark-theme .img-container {
+  background-color: rgba(255, 255, 255, 0.288);
+}
+
+.carInfo-container.light-theme .car-details {
+  background-color: #7b7467;
+}
+.carInfo-container.light-theme .car-details .details-header {
+  border-bottom: 3px solid #aeaeae;
+}
+.carInfo-container.light-theme .car-sliders {
+  background-color: #7b7467;
+}
+.carInfo-container.light-theme .img-container {
+  background-color: #cdc2ae;
+}
+.carInfo-container.light-theme .details-footer .seller-btn {
+  border: solid 1px white;
+}
+.carInfo-container.light-theme .details-footer .rent-btn {
+  border: solid 1px white;
+}
+.carInfo-container.light-theme .details-footer .delete-btn {
+  border: solid 1px white;
+}
+.carInfo-container.light-theme .details-footer .edit-btn {
+  border: solid 1px white;
 }/*# sourceMappingURL=CarInfo.css.map */

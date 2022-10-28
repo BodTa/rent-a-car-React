@@ -16,10 +16,10 @@
     top: 50%;
     margin: 0;
     background: none;
+    color: white;
     border: none;
     border-radius: 0%;
     transition: 0.5s linear;
-    backdrop-filter: blur(2px);
     &:hover {
       background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(8px);
@@ -37,14 +37,13 @@
     @include flexCenter(row, flex);
     justify-content: space-evenly;
     text-align: center;
-    background-color: #222831d2;
     .user-info-img {
-      border-radius: 50%;
-      width: 23vh;
+      border-radius: 10%;
+      width: 40vh;
       height: 21vh;
       overflow: hidden;
       .user-profile-img {
-        width: 100%;
+        width: 30vh;
         height: 21vh;
         object-fit: cover;
       }
@@ -52,14 +51,31 @@
     .user-info {
       width: 70%;
       height: 25vh;
-      @include flexCenter(column, flex);
+      @include flexCenter(row, flex);
       justify-content: space-evenly;
+      .user-info-icons {
+        width: 45%;
+        height: 100%;
+        svg {
+          height: 1.3rem;
+        }
+        @include flexCenter(column, flex);
+        justify-content: space-evenly;
+        align-items: flex-end;
+      }
+      .user-infos {
+        width: 50%;
+        height: 100%;
+        @include flexCenter(column, flex);
+        justify-content: space-evenly;
+        align-items: flex-start;
+      }
     }
   }
   .user-cars {
     position: relative;
     width: 100%;
-    height: 60vh;
+    height: 18rem;
     text-align: center;
     display: flex;
     justify-content: flex-start;
@@ -68,49 +84,53 @@
     grid-template: repeat(1, 1fr) / auto;
     .car-card {
       width: 16rem;
-      height: 15rem;
+      height: 13rem;
       .card-img {
         transition: 0.3s ease-in-out;
         width: 100%;
-        height: 100%;
+        height: 13rem;
         img {
           transition: 0.3s ease-in-out;
           width: 100%;
-          height: 90%;
+          height: 13rem;
           object-fit: cover;
         }
       }
       .card-footer {
         width: 100%;
+        height: 3vh;
         @include flexCenter(column, flex);
         justify-content: space-between;
-        .card-title {
-          font-size: 1rem;
-        }
         .card-buttons {
+          height: 4rem;
           width: 100%;
           @include flexCenter(row, flex);
           justify-content: space-evenly;
           button {
             @include buttonStyle();
+            height: 100%;
+            width: 7rem;
             font-size: 0.8rem;
-            width: 45%;
+            border: 2px dotted;
             margin: 0;
           }
-          .rent-btn {
-            width: 10rem;
+          .rent-btn,
+          .edit-btn {
+            border-color: #119da16b;
             &::before {
               background-color: #119da16b;
             }
           }
-          .stp-rent-btn {
+          .see-details-btn {
+            border-color: #3f71af6b;
             &::before {
-              background-color: #e8454579;
+              background-color: #3f71af6b;
             }
           }
-          .edit-btn {
+          .stp-rent-btn {
+            border-color: #e8454579;
             &::before {
-              background-color: #ffde7d5f;
+              background-color: #e8454579;
             }
           }
         }
@@ -123,6 +143,32 @@
     #goRight {
       right: 0;
       @extend %btn-styles;
+    }
+  }
+}
+
+.profile-container.dark-theme {
+  .user-info-container {
+    background-color: $dark-darkColor;
+  }
+  .user-carCards {
+    background-color: $dark-lightColor;
+  }
+}
+.profile-container.light-theme {
+  .user-info-container {
+    background-color: $light-darkColor;
+  }
+  .user-carCards {
+    background-color: $light-lightColor;
+    .car-card {
+      .card-footer {
+        .card-buttons {
+          button {
+            border: 2px solid white;
+          }
+        }
+      }
     }
   }
 }

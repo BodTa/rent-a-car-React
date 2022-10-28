@@ -67,7 +67,11 @@ const Card = (props) => {
   };
   return (
     <motion.div layout>
-      <div className="car-card">
+      <div
+        className={
+          props?.isDark ? "car-card dark-theme" : "car-card light-theme"
+        }
+      >
         <div className="card-img">
           <img src={props.imagePath} />
         </div>

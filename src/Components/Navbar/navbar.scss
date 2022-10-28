@@ -1,41 +1,41 @@
 @import "../styles/style.scss";
 
+// General designing for navbar.
 .navbar {
   width: 100%;
   z-index: 9999;
   position: fixed;
-}
-ul {
-  list-style: none;
-  @include flexCenter(row, flex);
-  justify-content: space-evenly;
-  column-gap: 1rem;
-  li {
-    cursor: pointer;
-    transition: 0.3s ease;
-    &:hover {
-      transform: scale(1.1);
-    }
-    a {
-      text-decoration: none;
+  ul {
+    list-style: none;
+    @include flexCenter(row, flex);
+    justify-content: space-evenly;
+    column-gap: 1rem;
+    li {
+      cursor: pointer;
+      transition: 0.3s ease;
       &:hover {
-        color: bisque;
+        transform: scale(1.1);
+      }
+      a {
+        text-decoration: none;
+        &:hover {
+          color: bisque;
+        }
       }
     }
-  }
-  button {
-    padding: 0.2rem;
-    font-size: 0.8rem;
+    button {
+      padding: 0.2rem;
+      font-size: 0.8rem;
+    }
   }
 }
+
 .nav-route {
   width: 70%;
   float: left;
   height: 55px;
   padding: 0.5rem;
   @include flexCenter(row, flex);
-  background-color: #222831;
-
   ul {
     width: 100%;
   }
@@ -68,11 +68,9 @@ ul {
   padding: 0.5rem;
   width: 30%;
   float: right;
-  background-color: #191d24;
-  border-left: 3px solid #767676;
-  .navbar {
+  .dropdown {
     position: relative;
-    .navbar-container {
+    .dropdown-container {
       cursor: auto;
       opacity: 1;
       position: absolute;
@@ -96,8 +94,31 @@ ul {
       }
     }
   }
-}
 
+  .switch {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    width: 3.3rem;
+    height: 1.5rem;
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      transition: 0.5s ease-out;
+      border-radius: 30px;
+    }
+  }
+}
+// Animation for dropdown.
 @keyframes dropDownAnimation {
   0% {
     opacity: 0;
@@ -108,5 +129,61 @@ ul {
     transform: translateY((0%));
     transform: translateX(45%);
     opacity: 1;
+  }
+}
+// Coloring depens on theme
+.navbar.dark-theme {
+  .nav-auth {
+    background-color: $dark-darkColor;
+    border-left: 3px solid #767676;
+    .switch {
+      .slider {
+        background-color: #51557e;
+        &::before {
+          position: absolute;
+          content: "";
+          transition: 0.5s ease-out;
+          height: 1.2rem;
+          width: 1.2rem;
+          border-radius: 20px;
+          left: 0.3rem;
+          bottom: 0.13rem;
+          background-image: url("./moon.svg");
+        }
+      }
+    }
+  }
+  .nav-route {
+    background-color: #222831;
+  }
+}
+.navbar.light-theme {
+  .nav-auth {
+    background-color: $light-darkColor;
+    border-left: 3px solid #ffffff;
+    .dropdown {
+      .dropdown-container {
+        background-color: $light-darkColor;
+      }
+    }
+    .switch {
+      .slider {
+        background-color: #98a8f8;
+        &::before {
+          position: absolute;
+          content: "";
+          transition: 0.5s ease-out;
+          height: 1.2rem;
+          width: 1.2rem;
+          border-radius: 20px;
+          left: 1.8rem;
+          bottom: 0.13rem;
+          background-image: url("./sun.svg");
+        }
+      }
+    }
+  }
+  .nav-route {
+    background-color: $light-lightColor;
   }
 }

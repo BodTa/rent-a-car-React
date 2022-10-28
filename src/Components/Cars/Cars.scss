@@ -179,4 +179,10 @@ $fontSize: 0.7rem;
       }
     }
   }
+  .car-card.dark-theme {
+    background: rgba(255, 255, 255, 0.26);
+  }
+  .car-card.light-theme {
+    background-color: #cdc2ae;
+  }
 }

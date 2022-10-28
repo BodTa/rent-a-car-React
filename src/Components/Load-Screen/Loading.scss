@@ -1,0 +1,5 @@
+@import "../styles/style.scss";
+.load-screen {
+  @include flexCenter(row, flex);
+  min-height: 100vh;
+}

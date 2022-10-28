@@ -37,7 +37,9 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      const userResponse = await axios.get(`/Users/getbyemail?email=${email}`);
+      const userResponse = await axios.get(
+        `/Users/getdetailsbyemail?email=${email}`
+      );
       const userId = userResponse.data.data.userId;
       const accessToken = response.data.accessToken.token;
       const decodedToken = await jwt_decode(accessToken);
@@ -52,6 +54,7 @@ const Login = () => {
         password: password,
         accessToken: accessToken,
         userId: userId,
+        phoneNumber: userResponse?.data?.data?.phoneNumber,
       });
       setEmail("");
       setPassword("");

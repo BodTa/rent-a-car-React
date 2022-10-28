@@ -14,6 +14,7 @@ const Cars = () => {
     setFavorites,
     carsTemp,
     setCarsTemp,
+    isDark,
   } = useGeneral();
 
   // Getting user favorites
@@ -65,6 +66,7 @@ const Cars = () => {
         description={car.description}
         isFavorited={isFavorited}
         setFavorites={setFavorites}
+        isDark={isDark}
         imagePath={"http://localhost:5149" + car.images[0].imagePath}
       />
     );
