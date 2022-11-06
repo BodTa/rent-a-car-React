@@ -4,8 +4,7 @@ import useGeneral from "../../hooks/useGeneral";
 const RequireAuth = ({ allowedRoles }) => {
   const { auth } = useGeneral();
   const location = useLocation();
-
-  return auth?.roles.find((role) => allowedRoles?.includes(role)) ? (
+  return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
     <Outlet /> // Email varsa istenilen yere gidicek
   ) : auth?.email ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />

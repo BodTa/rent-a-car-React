@@ -101,7 +101,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   padding: 0.1rem;
-  transform: translateX(45%);
+  transform: translateX(20%);
   -webkit-animation: dropDownAnimation 0.4s linear;
           animation: dropDownAnimation 0.4s linear;
 }
@@ -144,7 +144,7 @@
   }
   100% {
     transform: translateY(0%);
-    transform: translateX(45%);
+    transform: translateX(20%);
     opacity: 1;
   }
 }
@@ -157,13 +157,15 @@
   }
   100% {
     transform: translateY(0%);
-    transform: translateX(45%);
+    transform: translateX(20%);
     opacity: 1;
   }
 }
 .navbar.dark-theme .nav-auth {
-  background-color: #191d24;
-  border-left: 3px solid #767676;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-left: 3px solid #ffffff;
 }
 .navbar.dark-theme .nav-auth .switch .slider {
   background-color: #51557e;
@@ -180,15 +182,21 @@
   background-image: url("./moon.svg");
 }
 .navbar.dark-theme .nav-route {
-  background-color: #222831;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
 }
 
 .navbar.light-theme .nav-auth {
-  background-color: #7b7467;
+  background: rgba(75, 75, 75, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   border-left: 3px solid #ffffff;
 }
 .navbar.light-theme .nav-auth .dropdown .dropdown-container {
-  background-color: #7b7467;
+  background: rgba(75, 75, 75, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
 }
 .navbar.light-theme .nav-auth .switch .slider {
   background-color: #98a8f8;
@@ -205,5 +213,7 @@
   background-image: url("./sun.svg");
 }
 .navbar.light-theme .nav-route {
-  background-color: #cdc2ae;
+  background: rgba(75, 75, 75, 0.3);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
 }/*# sourceMappingURL=navbar.css.map */

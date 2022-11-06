@@ -10,21 +10,33 @@ import {
 import "./Profile.css";
 import UserCarCard from "./UserCarCard";
 import UserProfile from "./UserProfile";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import logo from "./logo.png";
 const Profile = () => {
   const { sellerId } = useParams();
-  const { auth, isDark } = useGeneral();
+  const { auth, isDark, toast, ToastContainer } = useGeneral();
+  const axiosPrivate = useAxiosPrivate();
   const [cars, setCars] = useState();
   const [sellerData, setSellerData] = useState();
   const [isSeller, setIsSeller] = useState(false);
+  const [isRated, setIsRated] = useState(false);
   const [x, setX] = useState(0);
+  const notify = (message) => {
+    toast.success(message, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
   useEffect(() => {
     const handleUserInfos = async () => {
-      const response = await axios.get(
-        `/users/detailsbyuserid?id=${sellerId}`,
-        {
-          withCredentials: true,
-        }
+      const response = await axiosPrivate.get(
+        `/users/detailsbyuserid?id=${sellerId}`
       );
       setSellerData(response.data);
     };
@@ -48,7 +60,7 @@ const Profile = () => {
     return () => {
       setCars();
     };
-  }, [sellerId]);
+  }, [sellerId, isRated]);
   useEffect(() => {
     setIsSeller(cars?.some(({ sellerId }) => sellerId === auth?.userId));
     return () => {
@@ -74,6 +86,7 @@ const Profile = () => {
           carName={car.carName}
           dailyPrice={car.dailyPrice}
           x={x}
+          axiosPrivate={axiosPrivate}
           isSeller={isSeller}
           carId={car.carId}
           imagePath={"http://localhost:5149" + car.images[0].imagePath}
@@ -89,11 +102,17 @@ const Profile = () => {
           : "profile-container light-theme"
       }
     >
+      <ToastContainer />
       <UserProfile
+        notify={notify}
         firstName={sellerData?.firstName}
         lastName={sellerData?.lastName}
         email={sellerData?.email}
         telNumber={sellerData?.telNumber}
+        sellerId={sellerId}
+        userId={auth?.userId}
+        Rates={sellerData?.rates}
+        setIsRated={setIsRated}
         imagePath={
           sellerData?.userPicture == null
             ? logo

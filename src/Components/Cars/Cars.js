@@ -16,12 +16,11 @@ const Cars = () => {
     setCarsTemp,
     isDark,
   } = useGeneral();
-
   // Getting user favorites
   useEffect(() => {
     const getFavs = async () => {
       try {
-        if (auth?.accessToken) {
+        if (auth) {
           const response = await axios.get(
             `/favorites/getbyuserid?userId=${auth?.userId}`
           );

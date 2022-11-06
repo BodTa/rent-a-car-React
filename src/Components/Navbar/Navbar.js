@@ -47,7 +47,7 @@ const Navbar = () => {
           </li>
           <li className="fav-icon" onClick={handleClick}>
             <FontAwesomeIcon icon={faHeart} />
-            {favorites && auth?.accessToken && <span>{favorites?.length}</span>}
+            {favorites && auth && <span>{favorites?.length}</span>}
             Favorites
           </li>
           <li className="rent-icon">
@@ -58,7 +58,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="nav-auth">
-        {!auth?.accessToken && (
+        {!auth && (
           <ul>
             <li>
               <label className="switch">
@@ -78,8 +78,18 @@ const Navbar = () => {
             </li>
           </ul>
         )}
-        {auth?.accessToken && (
+        {auth && (
           <ul>
+            <li>
+              <label className="switch">
+                <input type="checkbox" onChange={handleTheme} />
+                <span
+                  className={
+                    isDark ? "slider dark-theme" : "slider light-theme"
+                  }
+                ></span>
+              </label>
+            </li>
             <li>
               <h5>{auth?.email}</h5>
             </li>
@@ -101,16 +111,6 @@ const Navbar = () => {
                     onClick={() => setIsActive(false)}
                   />
                   <ul className="dropdown-container">
-                    <li>
-                      <label className="switch">
-                        <input type="checkbox" onChange={handleTheme} />
-                        <span
-                          className={
-                            isDark ? "slider dark-theme" : "slider light-theme"
-                          }
-                        ></span>
-                      </label>
-                    </li>
                     <li className="dropdown-logout" onClick={() => setAuth()}>
                       <FontAwesomeIcon icon={faArrowRightToBracket} />
                       Log Out

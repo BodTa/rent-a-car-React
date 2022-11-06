@@ -85,7 +85,7 @@
       @include flexCenter(column, flex);
       justify-content: space-evenly;
       padding: 0.1rem;
-      transform: translateX(45%);
+      transform: translateX(20%);
       animation: dropDownAnimation 0.4s linear;
       li {
         width: 100%;
@@ -127,15 +127,18 @@
   }
   100% {
     transform: translateY((0%));
-    transform: translateX(45%);
+    transform: translateX(20%);
     opacity: 1;
   }
 }
 // Coloring depens on theme
+
+// DARK THEME
 .navbar.dark-theme {
   .nav-auth {
-    background-color: $dark-darkColor;
-    border-left: 3px solid #767676;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-left: 3px solid #ffffff;
     .switch {
       .slider {
         background-color: #51557e;
@@ -154,16 +157,21 @@
     }
   }
   .nav-route {
-    background-color: #222831;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
   }
 }
+
+// LIGHT THEME
 .navbar.light-theme {
   .nav-auth {
-    background-color: $light-darkColor;
+    background: rgba(75, 75, 75, 0.3);
+    backdrop-filter: blur(10px);
     border-left: 3px solid #ffffff;
     .dropdown {
       .dropdown-container {
-        background-color: $light-darkColor;
+        background: rgba(75, 75, 75, 0.3);
+        backdrop-filter: blur(10px);
       }
     }
     .switch {
@@ -184,6 +192,7 @@
     }
   }
   .nav-route {
-    background-color: $light-lightColor;
+    background: rgba(75, 75, 75, 0.3);
+    backdrop-filter: blur(10px);
   }
 }

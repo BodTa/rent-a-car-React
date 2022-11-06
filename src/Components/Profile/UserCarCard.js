@@ -5,7 +5,6 @@ import useGeneral from "../../hooks/useGeneral";
 const UserCarCard = (props) => {
   const handleDelete = () => {};
   const handleEdit = () => {};
-  const { toast, ToastContainer, isDark } = useGeneral();
   return (
     <div className="car-card">
       <div className="card-img">
@@ -31,7 +30,6 @@ const UserCarCard = (props) => {
           </div>
         )}
       </div>
-      <ToastContainer />
     </div>
   );
 };

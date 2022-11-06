@@ -56,6 +56,15 @@ const Login = () => {
         userId: userId,
         phoneNumber: userResponse?.data?.data?.phoneNumber,
       });
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          email: email,
+          userId: userId,
+          roles: roles,
+          accessToken: accessToken,
+        })
+      );
       setEmail("");
       setPassword("");
       navigate(from, { replace: true });
@@ -78,7 +87,6 @@ const Login = () => {
       theme: "dark",
     });
   };
-  console.log(auth);
   return (
     <section onSubmit={handleSubmit}>
       <ToastContainer />

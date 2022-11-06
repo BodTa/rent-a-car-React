@@ -2,15 +2,15 @@ import axios from "../api/axios";
 import useGeneral from "./useGeneral";
 const useRefreshToken = () => {
   const { setAuth } = useGeneral();
+
   const refresh = async () => {
-    const response = await axios.get("/auth/refresh-token", {
+    const response = await axios.get("/Auth/refresh", {
       withCredentials: true,
     });
     setAuth((prev) => {
-      console.log(prev);
+      console.log(`Refresh Token: ${response.data}`);
       return {
         ...prev,
-        email: "123",
         accessToken: response.data,
       };
     });

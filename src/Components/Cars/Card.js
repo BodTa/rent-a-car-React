@@ -4,12 +4,13 @@ import "./Cars.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeartCirclePlus, faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import useGeneral from "../../hooks/useGeneral";
 import { motion } from "framer-motion";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 const Card = (props) => {
   const { auth, ToastContainer, toast } = useGeneral();
+  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   // Checking if car is in favs.
   const notify = () => {
@@ -24,44 +25,43 @@ const Card = (props) => {
       theme: "dark",
     });
   };
+  // Navigating to car Infos.
   const handleClick = () => {
     navigate(`/carinfo/${props.carId}`);
   };
+  // Adding to the Favs
   const addToFav = async () => {
     if (auth) {
       try {
-        const response = await axios.post(
-          "/favorites/add",
-          { userId: auth.userId, carId: props.carId },
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axiosPrivate.post("/favorites/add", {
+          userId: auth.userId,
+          carId: props.carId,
+        });
         props.setFavorites((prev) => {
           return [...prev, { carId: props.carId, userId: props.userId }];
         });
       } catch (error) {
         console.log(error);
+        navigate("/login", { state: { from: "/" }, replace: true });
       }
     } else {
       notify();
     }
   };
+  //Removing from Favs
   const removeFromFav = async () => {
     if (auth) {
       try {
-        const response = await axios.post(
-          "/favorites/delete",
-          { userId: auth.userId, carId: props.carId },
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axiosPrivate.post("/favorites/delete", {
+          userId: auth.userId,
+          carId: props.carId,
+        });
         props.setFavorites((prev) => {
           return prev.filter(({ carId }) => carId !== props.carId);
         });
       } catch (error) {
         console.log(error);
+        navigate("/login", { state: { from: "/" }, replace: true });
       }
     }
   };

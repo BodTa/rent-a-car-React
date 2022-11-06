@@ -9,13 +9,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
+import { useNavigate, useLocation } from "react-router-dom";
 const Rent = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
-  const { cars, ToastContainer, toast, auth } = useGeneral();
+  const { cars, ToastContainer, toast, auth, axiosPrivate } = useGeneral();
   const car = cars.find(({ carId }) => carId == id);
   const [x, setX] = useState(0);
   const [rentDate, setRentDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
+
   const carImages = car?.images;
   const goLeft = () => {
     x === 0 ? setX(-100 * (carImages?.length - 1)) : setX(x + 100);
@@ -27,6 +31,7 @@ const Rent = () => {
     setX(0);
     setX(-100 * index);
   };
+  // Notifier
   const notify = (type, message) => {
     if (type === "error") {
       toast.error(message, {
@@ -52,10 +57,12 @@ const Rent = () => {
       });
     }
   };
+
+  // Posting data to Backend -- Adding Opt.
   const handleRent = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axiosPrivate.post(
         "/Rentals/add",
         JSON.stringify({
           carId: id,
@@ -71,6 +78,7 @@ const Rent = () => {
       notify("success", "Car has rented! Have a nice ride");
     } catch (error) {
       notify("error", error.response.data.message);
+      navigate("/login", { state: { from: location }, replace: true });
     }
   };
   return (

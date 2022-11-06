@@ -71,6 +71,9 @@
         align-items: flex-start;
       }
     }
+    .user-info-rate {
+      @include flexCenter(row, flex);
+    }
   }
   .user-cars {
     position: relative;
