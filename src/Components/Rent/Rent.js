@@ -8,7 +8,6 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "../../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 const Rent = () => {
   const navigate = useNavigate();

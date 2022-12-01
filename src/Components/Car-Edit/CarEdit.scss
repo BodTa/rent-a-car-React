@@ -1,0 +1,15 @@
+@import "../styles/style.scss";
+.car-edit-container {
+  max-height: 80vh;
+  width: 100%;
+  color: black;
+  form {
+    width: 50%;
+    row-gap: 0.3rem;
+    input {
+      border-radius: 0.1rem;
+      border: none;
+      outline: none;
+    }
+  }
+}

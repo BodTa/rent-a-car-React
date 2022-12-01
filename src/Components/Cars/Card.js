@@ -73,12 +73,12 @@ const Card = (props) => {
         }
       >
         <div className="card-img">
-          <img src={props.imagePath} />
+          <img src={props.imagePath} loading="lazy" />
         </div>
         <div className="card-footer">
           <h3 className="car-price">{props.dailyPrice} $</h3>
           <h3 className="card-title">
-            {props.brandName} {props.carName}
+            {props.brandName} {props.carModel}
           </h3>
           <div className="card-buttons">
             <div className="card-fav">

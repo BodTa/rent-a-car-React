@@ -1,26 +1,21 @@
 import { MotionConfig } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import axios from "../../api/axios";
-
+import carGetAll from "../../services/cars/carGetAll";
 import useGeneral from "../../hooks/useGeneral";
-import Card from "./Card";
 import { motion } from "framer-motion";
+import Loading from "../Load-Screen/Loading";
 const Cars = () => {
-  const {
-    auth,
-    cars,
-    setCars,
-    favorites,
-    setFavorites,
-    carsTemp,
-    setCarsTemp,
-    isDark,
-  } = useGeneral();
+  const Card = lazy(() => import("./Card"));
+  const abort = new AbortController();
+  const { auth, cars, setCars, favorites, setFavorites, setCarsTemp, isDark } =
+    useGeneral();
   // Getting user favorites
   useEffect(() => {
     const getFavs = async () => {
       try {
-        if (auth) {
+        if (auth.userId) {
           const response = await axios.get(
             `/favorites/getbyuserid?userId=${auth?.userId}`
           );
@@ -39,16 +34,12 @@ const Cars = () => {
 
   // Getting cars data
   useEffect(() => {
-    const getCars = async () => {
-      try {
-        const response = await axios.get("/cars/getall", {
-          withCredentials: true,
-        });
-        setCars(response.data.data);
-        setCarsTemp(response.data.data);
-      } catch (error) {}
+    const handleCars = async () => {
+      const response = await carGetAll();
+      setCars(response);
+      setCarsTemp(response);
     };
-    getCars();
+    handleCars();
     return () => {};
   }, []);
 
@@ -58,7 +49,7 @@ const Cars = () => {
       <Card
         key={car.carId}
         brandName={car.brandName}
-        carName={car.carName}
+        carModel={car.carModel}
         dailyPrice={car.dailyPrice}
         modelYear={car.modelYear}
         carId={car.carId}
@@ -66,11 +57,15 @@ const Cars = () => {
         isFavorited={isFavorited}
         setFavorites={setFavorites}
         isDark={isDark}
-        imagePath={"http://localhost:5149" + car.images[0].imagePath}
+        imagePath={"http://localhost:5149" + car.images[0]?.imagePath}
       />
     );
   });
-  return <motion.div className="car-container">{carCard}</motion.div>;
+  return (
+    <Suspense fallback={<Loading />}>
+      <motion.div className="car-container">{carCard}</motion.div>
+    </Suspense>
+  );
 };
 
 export default Cars;

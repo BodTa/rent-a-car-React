@@ -4,6 +4,7 @@
 .navbar {
   width: 100%;
   z-index: 9999;
+  box-shadow: 0px 1px 8px 2px rgba(255, 255, 255, 0.38);
   position: fixed;
   ul {
     list-style: none;
@@ -164,6 +165,7 @@
 
 // LIGHT THEME
 .navbar.light-theme {
+  box-shadow: 0px 2px 8px 5px rgba(69, 68, 68, 0.67);
   .nav-auth {
     background: rgba(75, 75, 75, 0.3);
     backdrop-filter: blur(10px);

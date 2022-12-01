@@ -1,0 +1,14 @@
+.car-edit-container {
+  max-height: 80vh;
+  width: 100%;
+  color: black;
+}
+.car-edit-container form {
+  width: 50%;
+  row-gap: 0.3rem;
+}
+.car-edit-container form input {
+  border-radius: 0.1rem;
+  border: none;
+  outline: none;
+}/*# sourceMappingURL=CarEdit.css.map */

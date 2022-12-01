@@ -4,6 +4,7 @@
 .carInfo-container {
   padding: 1rem;
   margin-top: 1rem;
+  width: 100%;
   height: 90vh;
   @include flexCenter(row, grid);
   column-gap: 2rem;
@@ -11,22 +12,26 @@
   @include carSlider();
 
   .img-container {
-    padding: 0.5rem;
+    padding: 0.3rem;
     overflow: hidden;
-    height: 30%;
+    height: 23.5vh;
     width: 100%;
+    @include flexCenter(row, flex);
     .small-card-container {
+      padding-top: 0.5rem;
+      height: 23.5vh;
       width: 100%;
       @include flexCenter(row, grid);
-      grid-template: repeat(2/1fr) / repeat(8/1fr);
       justify-content: flex-start;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(2, 1fr);
       .small-img-card {
-        cursor: pointer;
-        height: 3.2rem;
-        width: 3rem;
         img {
-          height: 3rem;
-          width: 4rem;
+          margin: 0;
+          padding: 0;
+          cursor: pointer;
+          height: 3.2rem;
+          width: 3.5rem;
           object-fit: cover;
         }
       }

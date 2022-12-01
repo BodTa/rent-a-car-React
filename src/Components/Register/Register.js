@@ -11,7 +11,7 @@ import axios from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
 import useGeneral from "../../hooks/useGeneral";
 
-const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{3,4}$/;
+const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const NAME_REGEX = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;

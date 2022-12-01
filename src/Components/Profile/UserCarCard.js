@@ -1,10 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import useGeneral from "../../hooks/useGeneral";
+import { Link, useNavigate } from "react-router-dom";
 
 const UserCarCard = (props) => {
-  const handleDelete = () => {};
-  const handleEdit = () => {};
+  const navigate = useNavigate();
   return (
     <div className="car-card">
       <div className="card-img">
@@ -17,8 +15,18 @@ const UserCarCard = (props) => {
         </h5>
         {props?.isSeller && (
           <div className="card-buttons">
-            <button className="stp-rent-btn">Stop Renting</button>
-            <button className="edit-btn">Edit</button>
+            <button
+              className="stp-rent-btn"
+              onClick={() => props.handleDelete(props.carId)}
+            >
+              Stop Renting
+            </button>
+            <button
+              className="edit-btn"
+              onClick={() => navigate(`/car-edit/${props?.carId}`)}
+            >
+              Edit
+            </button>
           </div>
         )}
         {!props?.isSeller && (

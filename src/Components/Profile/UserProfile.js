@@ -20,7 +20,6 @@ const UserProfile = ({
 }) => {
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
-  console.log(Rates);
   const handleRate = (e) => {
     try {
       var result = axiosPrivate.post(
@@ -64,7 +63,7 @@ const UserProfile = ({
         <ReactStars
           count={5}
           value={avgRate}
-          size={30}
+          size={25}
           color2={"#ffd700"}
           onChange={handleRate}
         />

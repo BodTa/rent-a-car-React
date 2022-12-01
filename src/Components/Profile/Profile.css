@@ -87,6 +87,12 @@
   justify-content: space-evenly;
   align-items: flex-start;
 }
+.profile-container .user-info-container .user-info-rate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
 .profile-container .user-cars {
   position: relative;
   width: 100%;

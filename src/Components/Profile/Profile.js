@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../api/axios";
 import useGeneral from "../../hooks/useGeneral";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,28 +11,18 @@ import "./Profile.css";
 import UserCarCard from "./UserCarCard";
 import UserProfile from "./UserProfile";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import carDelete from "../../services/cars/carDelete";
 import logo from "./logo.png";
 const Profile = () => {
   const { sellerId } = useParams();
-  const { auth, isDark, toast, ToastContainer } = useGeneral();
+  const { auth, isDark, toast, ToastContainer, notifyError, notifySuccess } =
+    useGeneral();
   const axiosPrivate = useAxiosPrivate();
   const [cars, setCars] = useState();
   const [sellerData, setSellerData] = useState();
   const [isSeller, setIsSeller] = useState(false);
   const [isRated, setIsRated] = useState(false);
   const [x, setX] = useState(0);
-  const notify = (message) => {
-    toast.success(message, {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
   useEffect(() => {
     const handleUserInfos = async () => {
       const response = await axiosPrivate.get(
@@ -74,6 +64,13 @@ const Profile = () => {
     x === -100 * (cars?.length - 1) ? setX(0) : setX(x - 200);
   };
 
+  const handleDelete = async (id) => {
+    const response = await carDelete(id, axiosPrivate);
+    response
+      ? notifySuccess("Your has been withdrawed from renting...")
+      : notifyError("An Error Accured");
+    setCars(cars?.filter((car) => car.carId != id));
+  };
   const carCard = cars?.map((car) => {
     return (
       <div
@@ -87,9 +84,10 @@ const Profile = () => {
           dailyPrice={car.dailyPrice}
           x={x}
           axiosPrivate={axiosPrivate}
+          handleDelete={handleDelete}
           isSeller={isSeller}
           carId={car.carId}
-          imagePath={"http://localhost:5149" + car.images[0].imagePath}
+          imagePath={"http://localhost:5149" + car.images[0]?.imagePath}
         />
       </div>
     );
@@ -104,7 +102,7 @@ const Profile = () => {
     >
       <ToastContainer />
       <UserProfile
-        notify={notify}
+        notify={notifySuccess}
         firstName={sellerData?.firstName}
         lastName={sellerData?.lastName}
         email={sellerData?.email}
@@ -121,12 +119,16 @@ const Profile = () => {
       />
       <div className="user-cars">
         {carCard}
-        <button id="goLeft" onClick={goLeft}>
-          <FontAwesomeIcon className="icons" icon={faChevronLeft} />
-        </button>
-        <button id="goRight" onClick={goRight}>
-          <FontAwesomeIcon className="icons" icon={faChevronRight} />
-        </button>
+        {cars?.length > 4 && (
+          <button id="goLeft" onClick={goLeft}>
+            <FontAwesomeIcon className="icons" icon={faChevronLeft} />
+          </button>
+        )}
+        {cars?.length > 4 && (
+          <button id="goRight" onClick={goRight}>
+            <FontAwesomeIcon className="icons" icon={faChevronRight} />
+          </button>
+        )}
       </div>
     </div>
   );

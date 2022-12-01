@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useGeneral from "../../../hooks/useGeneral";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import {
   faChevronLeft,
   faChevronRight,
@@ -16,14 +15,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {} from "@fortawesome/free-regular-svg-icons";
 import "./CarInfo.css";
+import carDefault from "./default-car.jpg";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import carDelete from "../../../services/cars/carDelete";
 const CarInfo = () => {
+  const axiosPrivate = useAxiosPrivate();
   const { id } = useParams();
-  const { cars, auth, isDark } = useGeneral();
-  const [x, setX] = useState(0);
+  const { cars, auth, isDark, notifyError, notifySuccess } = useGeneral();
   const navigate = useNavigate();
-  const car = cars.find(({ carId }) => carId == id);
-  const [isSeller, setIsSeller] = useState(false);
-  const carImages = car?.images;
+  //Getting selected car data by given id
+  const car = cars?.find(({ carId }) => carId == id);
+  const [isSeller, setIsSeller] = useState(false); // Checking if user is the seller
+  const carImages = car?.images; // getting car images
+
+  // For Image sliding.
+  const [x, setX] = useState(0);
   const goLeft = () => {
     x === 0 ? setX(-100 * (carImages?.length - 1)) : setX(x + 100);
   };
@@ -40,6 +46,14 @@ const CarInfo = () => {
       setIsSeller(false);
     };
   }, [car]);
+
+  const handleDelete = async () => {
+    const response = await carDelete(id, axiosPrivate);
+    response
+      ? notifySuccess("Your has been withdrawed from renting...")
+      : notifyError("An Error Accured");
+    navigate("/");
+  };
   return (
     <div
       className={
@@ -50,18 +64,26 @@ const CarInfo = () => {
     >
       <div className="car-sliders">
         <div className="car-slider">
-          {carImages?.map((image, index) => {
-            return (
-              <div
-                key={index}
-                className="car-slide"
-                style={{ transform: `translateX(${x}%)` }}
-              >
-                <img src={"http://localhost:5149" + image.imagePath} />
-              </div>
-            );
-          })}
-
+          {carImages[0] &&
+            carImages?.map((image, index) => {
+              return (
+                <div
+                  key={index}
+                  className="car-slide"
+                  style={{ transform: `translateX(${x}%)` }}
+                >
+                  <img src={"http://localhost:5149" + image.imagePath} />
+                </div>
+              );
+            })}
+          {!carImages[0] && (
+            <div
+              className="car-slide"
+              style={{ transform: `translateX(${x}%)` }}
+            >
+              <img src={carDefault} />
+            </div>
+          )}
           {carImages?.length > 1 && (
             <div>
               <button id="goLeft" onClick={goLeft}>
@@ -75,17 +97,18 @@ const CarInfo = () => {
         </div>
         <div className="img-container">
           <div className="small-card-container">
-            {carImages?.map((image, index) => {
-              return (
-                <div
-                  onClick={() => goToImage(index)}
-                  key={index}
-                  className="small-img-card"
-                >
-                  <img src={"http://localhost:5149" + image.imagePath} />
-                </div>
-              );
-            })}
+            {carImages &&
+              carImages?.map((image, index) => {
+                return (
+                  <div
+                    onClick={() => goToImage(index)}
+                    key={index}
+                    className="small-img-card"
+                  >
+                    <img src={"http://localhost:5149" + image.imagePath} />
+                  </div>
+                );
+              })}
           </div>
           <div className="img-container-slider"></div>
         </div>
@@ -94,7 +117,7 @@ const CarInfo = () => {
       <div className="car-details">
         <div className="details-header">
           <h3>
-            {car?.brandName} - {car?.carName}
+            {car?.brandName} - {car?.carModel}
           </h3>
         </div>
         <div className="details">
@@ -164,8 +187,15 @@ const CarInfo = () => {
         )}
         {isSeller && (
           <div className="details-footer">
-            <button className="delete-btn">Stop Renting</button>
-            <button className="edit-btn">Edit</button>
+            <button className="delete-btn" onClick={handleDelete}>
+              Stop Renting
+            </button>
+            <button
+              className="edit-btn"
+              onClick={() => navigate(`/car-edit/${id}`)}
+            >
+              Edit
+            </button>
           </div>
         )}
       </div>

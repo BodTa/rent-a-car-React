@@ -33,9 +33,10 @@ input[type="email"],
 input[type="password"],
 input[type="text"],
 input[type="tel"],
+input[type="number"],
 button,
 textarea {
-  font-family: "Nunito", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;

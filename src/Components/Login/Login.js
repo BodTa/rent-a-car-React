@@ -8,13 +8,14 @@ import useGeneral from "../../hooks/useGeneral";
 const LOGIN_URL = "/auth/login";
 
 const Login = () => {
-  const { auth, setAuth, ToastContainer, toast } = useGeneral();
+  const { auth, setAuth, ToastContainer, toast, notifyError, notifySuccess } =
+    useGeneral();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/"; //To locate the user to where he/she came from.
   const emailRef = useRef();
   const errRef = useRef();
-
+  localStorage.removeItem("user");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -51,7 +52,6 @@ const Login = () => {
       setAuth({
         roles: roles,
         email: email,
-        password: password,
         accessToken: accessToken,
         userId: userId,
         phoneNumber: userResponse?.data?.data?.phoneNumber,
@@ -59,10 +59,7 @@ const Login = () => {
       localStorage.setItem(
         "user",
         JSON.stringify({
-          email: email,
           userId: userId,
-          roles: roles,
-          accessToken: accessToken,
         })
       );
       setEmail("");
@@ -70,22 +67,10 @@ const Login = () => {
       navigate(from, { replace: true });
     } catch (error) {
       if (!error?.response) {
-        notify("No Server Response");
+        notifyError("No Server Response");
       }
-      notify(error.response.data);
+      notifyError(error.response.data);
     }
-  };
-  const notify = (message) => {
-    toast.error(message, {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
   };
   return (
     <section onSubmit={handleSubmit}>
