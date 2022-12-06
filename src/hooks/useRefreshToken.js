@@ -1,8 +1,8 @@
 import axios from "../api/axios";
 import jwt_decode from "jwt-decode";
-import useGeneral from "./useGeneral";
+import useAuth from "./useAuth";
 const useRefreshToken = () => {
-  const { setAuth } = useGeneral();
+  const { setAuth } = useAuth();
 
   try {
     const refresh = async () => {

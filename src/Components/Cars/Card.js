@@ -8,23 +8,14 @@ import { useNavigate } from "react-router-dom";
 import useGeneral from "../../hooks/useGeneral";
 import { motion } from "framer-motion";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAuth from "../../hooks/useAuth";
 const Card = (props) => {
-  const { auth, ToastContainer, toast } = useGeneral();
+  const { notifyInfo } = useGeneral();
+  const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   // Checking if car is in favs.
-  const notify = () => {
-    toast.info("Youu need to log in first.", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
+
   // Navigating to car Infos.
   const handleClick = () => {
     navigate(`/carinfo/${props.carId}`);
@@ -45,7 +36,7 @@ const Card = (props) => {
         navigate("/login", { state: { from: "/" }, replace: true });
       }
     } else {
-      notify();
+      notifyInfo();
     }
   };
   //Removing from Favs
@@ -108,7 +99,6 @@ const Card = (props) => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </motion.div>
   );
 };

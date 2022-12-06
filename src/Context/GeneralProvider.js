@@ -5,64 +5,14 @@ import axios from "../api/axios";
 const GeneralContext = createContext({});
 
 export const GeneralProvider = ({ children }) => {
+  //States
   const [cars, setCars] = useState([]);
   const [brands, setBrands] = useState([]);
   const [colors, setColors] = useState([]);
   const [carsTemp, setCarsTemp] = useState([]);
   const [favorites, setFavorites] = useState();
-  const brandOptions = brands?.map((brand) => {
-    return {
-      value: brand.brandId,
-      label: brand.brandName,
-    };
-  });
-  const colorOptions = colors?.map((color) => {
-    return {
-      value: color.colorId,
-      label: color.colorName,
-    };
-  });
-  const fuelOptions = [
-    { value: 1, label: "Diesel" },
-    { value: 5, label: "Gasoline" },
-    { value: 2, label: "Hybrid" },
-    { value: 3, label: "LPG" },
-    { value: 4, label: "Electricity" },
-  ];
-  const gearOptions = [
-    { value: 1, label: "Manuel" },
-    { value: 2, label: "Automatic" },
-    { value: 3, label: "Triptonik" },
-  ];
-  const doorOpitons = [
-    { value: 1, label: "2" },
-    { value: 2, label: "4" },
-    { value: 3, label: "6" },
-    { value: 4, label: "6+" },
-  ];
-  const carTypeOptions = [
-    { value: 1, label: "Coupe" },
-    { value: 5, label: "Convertible" },
-    { value: 2, label: "Hatchback" },
-    { value: 3, label: "Sedan" },
-    { value: 4, label: "SUV" },
-    { value: 5, label: "Crossover" },
-    { value: 6, label: "Sport" },
-    { value: 7, label: "Minivan" },
-    { value: 8, label: "Wagon" },
-    { value: 9, label: "Van" },
-    { value: 10, label: "Super" },
-    { value: 10, label: "Truck" },
-  ];
-  const [auth, setAuth] = useState(
-    JSON.parse(localStorage.getItem("user"))
-      ? JSON.parse(localStorage.getItem("user"))
-      : {}
-  );
-  const [isDark, setIsDark] = useState(
-    JSON.parse(localStorage.getItem("isDark")) ? true : false
-  );
 
+  //Error notfier
   const notifyError = (message) => {
     toast.error(message, {
       position: "bottom-right",
@@ -75,6 +25,7 @@ export const GeneralProvider = ({ children }) => {
       theme: "dark",
     });
   };
+  //Success Notfier
   const notifySuccess = (message) => {
     toast.success(message, {
       position: "bottom-right",
@@ -87,6 +38,19 @@ export const GeneralProvider = ({ children }) => {
       theme: "dark",
     });
   };
+  const notifyInfo = (message) => {
+    toast.info(message, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+  //Getting all brands from Database
   useEffect(() => {
     try {
       const getBrands = async () => {
@@ -99,6 +63,8 @@ export const GeneralProvider = ({ children }) => {
       setBrands();
     };
   }, []);
+
+  //Getting all cvolors from Database
   useEffect(() => {
     try {
       const getColors = async () => {
@@ -108,6 +74,24 @@ export const GeneralProvider = ({ children }) => {
       getColors();
     } catch (error) {}
   }, []);
+
+  //Turning brands into Select options
+  const brandOptions = brands?.map((brand) => {
+    return {
+      value: brand.brandId,
+      label: brand.brandName,
+    };
+  });
+
+  //Turning colors into Select options
+  const colorOptions = colors?.map((color) => {
+    return {
+      value: color.colorId,
+      label: color.colorName,
+    };
+  });
+
+  //Returning Datas to children of this Context
   return (
     <GeneralContext.Provider
       value={{
@@ -119,21 +103,14 @@ export const GeneralProvider = ({ children }) => {
         setFavorites,
         ToastContainer,
         toast,
-        auth,
-        setAuth,
-        isDark,
-        setIsDark,
         colors,
         setColors,
         brands,
         setBrands,
         brandOptions,
         colorOptions,
-        fuelOptions,
-        gearOptions,
-        doorOpitons,
-        carTypeOptions,
         notifyError,
+        notifyInfo,
         notifySuccess,
       }}
     >

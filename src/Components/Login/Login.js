@@ -5,20 +5,22 @@ import axios from "../../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import useGeneral from "../../hooks/useGeneral";
+import useAuth from "../../hooks/useAuth";
+import useToggle from "../../hooks/useToggle";
 const LOGIN_URL = "/auth/login";
 
 const Login = () => {
-  const { auth, setAuth, ToastContainer, toast, notifyError, notifySuccess } =
-    useGeneral();
+  const { ToastContainer, notifyError } = useGeneral();
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/"; //To locate the user to where he/she came from.
   const emailRef = useRef();
   const errRef = useRef();
-  localStorage.removeItem("user");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [check, toggleCheck] = useToggle("persist", false);
   useEffect(() => {
     emailRef.current.focus();
   }, []);
@@ -26,7 +28,10 @@ const Login = () => {
   useEffect(() => {
     setErrMsg("");
   }, [email, password]);
-
+  // useEffect(() => {
+  //   localStorage.setItem("persist", JSON.stringify(persist));
+  //   return () => {};
+  // }, [persist]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -106,8 +111,16 @@ const Login = () => {
           value={password}
           required
         />
+        <div className="persistCheck">
+          <input
+            type="checkbox"
+            id="persist"
+            onChange={toggleCheck}
+            checked={check}
+          />
+          <label htmlFor="persist">Remember me</label>
+        </div>
         <button className="sign-in">Sign In</button>
-
         <p>
           Need an Account? <br />
           <span className="line">

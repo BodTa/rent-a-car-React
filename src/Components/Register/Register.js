@@ -9,7 +9,7 @@ import jwt_decode from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
 import { Link, useNavigate } from "react-router-dom";
-import useGeneral from "../../hooks/useGeneral";
+import useAuth from "../../hooks/useAuth";
 
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PASSWORD_REGEX =
@@ -21,7 +21,7 @@ const REGISTER_URL = "/Auth/register";
 const Register = () => {
   const firstNameRef = useRef();
   const errRef = useRef();
-  const { setAuth } = useGeneral();
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -159,7 +159,7 @@ const Register = () => {
   };
 
   return (
-    <section>
+    <section className="register-body">
       <p
         ref={errRef}
         className={errMsg ? "errmsg" : "offscreen"}

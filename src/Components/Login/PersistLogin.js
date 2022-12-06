@@ -1,30 +1,29 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useRefreshToken from "../../hooks/useRefreshToken";
-import Loading from "../Load-Screen/Loading";
-import useGeneral from "../../hooks/useGeneral";
+import useAuth from "../../hooks/useAuth";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
-  const { auth } = useGeneral();
+  const { auth } = useAuth();
   const navigate = useNavigate();
+  const persist = useLocalStorage("persist", false);
   useEffect(() => {
+    let isMounted = true;
     const verifyRefreshToken = async () => {
       try {
         await refresh();
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false);
+        isMounted && setIsLoading(false);
       }
     };
     !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
+    return () => (isMounted = false);
   }, []);
-
-  useEffect(() => {
-    console.log(`auth : ${JSON.stringify(auth)}`);
-  }, [isLoading]);
-  return <>{isLoading ? navigate("/") : <Outlet />}</>;
+  return <>{!persist ? <Outlet /> : isLoading ? navigate("/") : <Outlet />}</>;
 };
 export default PersistLogin;

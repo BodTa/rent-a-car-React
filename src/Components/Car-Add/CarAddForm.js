@@ -6,28 +6,28 @@ import FileUpload from "./FileUpload";
 import FileList from "./FileList";
 const CarAddForm = ({
   imgFiles,
+  uploadHandler,
+  fuelOptions,
   carTypeOptions,
   brandOptions,
   colorOptions,
   handleCarAdd,
   gearOptions,
-  setCarModel,
   doorOpitons,
-  setModelYear,
-  setHorsePower,
-  setEngineCapacity,
-  setKilometer,
   setImgFiles,
-  setBrand,
-  fuelOptions,
-  setColor,
-  setDailyPrice,
-  setGearType,
-  setFuelType,
-  setDoorCount,
-  setDescription,
-  uploadHandler,
-  setCarType,
+  carTypeAttribute,
+  carModelAttribute,
+  modelYearAttribute,
+  horsePowerAttribute,
+  engineCapacityAttribute,
+  kilometerAttribute,
+  brandAttribute,
+  colorAttribute,
+  dailyPriceAttribute,
+  gearTypeAttribute,
+  fuelTypeAttribute,
+  doorCountAttribute,
+  descriptionAttribute,
 }) => {
   return (
     <div className="car-add-container">
@@ -40,14 +40,14 @@ const CarAddForm = ({
             options={brandOptions}
             isSearchable
             placeholder="Brand"
+            {...brandAttribute}
             isClearable
-            onChange={setBrand}
             required
           />
           <input
             type="text"
             placeholder="Model"
-            onChange={(e) => setCarModel(e.target.value)}
+            {...carModelAttribute}
             required
           />
           <Select
@@ -55,13 +55,13 @@ const CarAddForm = ({
             isSearchable
             placeholder="Car Type"
             isClearable
-            onChange={setCarType}
+            {...carTypeAttribute}
             required
           />
           <Select
             options={colorOptions}
             isSearchable
-            onChange={setColor}
+            {...colorAttribute}
             placeholder="Color"
             isClearable
             required
@@ -70,7 +70,7 @@ const CarAddForm = ({
             type="number"
             min="1886"
             max={new Date().getFullYear()}
-            onChange={(e) => setModelYear(e.target.value)}
+            {...modelYearAttribute}
             placeholder="Model Year"
             required
           />
@@ -80,7 +80,7 @@ const CarAddForm = ({
             isSearchable
             placeholder="Door Count"
             isClearable
-            onChange={setDoorCount}
+            {...doorCountAttribute}
             required
           />
           <input
@@ -88,7 +88,7 @@ const CarAddForm = ({
             min="120"
             max="1000"
             placeholder="Horse Power (HP)"
-            onChange={(e) => setHorsePower(e.target.value)}
+            {...horsePowerAttribute}
             required
           />
           <input
@@ -96,7 +96,7 @@ const CarAddForm = ({
             min="100"
             max="6500"
             placeholder="Engine Capacity (CC)"
-            onChange={(e) => setEngineCapacity(e.target.value)}
+            {...engineCapacityAttribute}
             required
           />
           <input
@@ -104,13 +104,13 @@ const CarAddForm = ({
             min="0"
             max="4999999"
             placeholder="Kilometer"
-            onChange={(e) => setKilometer(e.target.value)}
+            {...kilometerAttribute}
             required
           />
           <Select
             options={gearOptions}
             isSearchable
-            onChange={setGearType}
+            {...gearTypeAttribute}
             placeholder="Gear Type"
             isClearable
             required
@@ -120,7 +120,7 @@ const CarAddForm = ({
             isSearchable
             placeholder="Fuel Type"
             isClearable
-            onChange={setFuelType}
+            {...fuelTypeAttribute}
             required
           />
           <input
@@ -128,14 +128,14 @@ const CarAddForm = ({
             min="10"
             placeholder="Daily Price"
             required
-            onChange={(e) => setDailyPrice(e.target.value)}
+            {...dailyPriceAttribute}
           />
           <textarea
             className="about-car"
             type="text"
             placeholder="About Car"
             required
-            onChange={(e) => setDescription(e.target.value)}
+            {...descriptionAttribute}
           />
           <button className="car-add-button">Rent Your Car!</button>
         </form>

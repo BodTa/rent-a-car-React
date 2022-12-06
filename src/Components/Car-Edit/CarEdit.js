@@ -5,17 +5,11 @@ import useGeneral from "../../hooks/useGeneral";
 import Select from "react-select";
 import "./CarEdit.css";
 import { useEffect } from "react";
+import useOptions from "../../hooks/useOptions";
 const CarEdit = ({}) => {
-  const {
-    cars,
-    auth,
-    brandOptions,
-    colorOptions,
-    fuelOptions,
-    gearOptions,
-    doorOpitons,
-    carTypeOptions,
-  } = useGeneral();
+  const { cars, auth, brandOptions, colorOptions } = useGeneral();
+  const { fuelOptions, gearOptions, doorOpitons, carTypeOptions } =
+    useOptions();
   const [carToEdit, setCarToEdit] = useState();
   const currentCarId = useParams();
   useEffect(() => {

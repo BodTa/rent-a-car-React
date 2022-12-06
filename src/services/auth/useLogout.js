@@ -1,9 +1,12 @@
 import axios from "../../api/axios";
-import useGeneral from "../../hooks/useGeneral";
+import useAuth from "../../hooks/useAuth";
 
 const useLogout = () => {
-  const { setAuth } = useGeneral();
+  const { setAuth, setPersist } = useAuth();
   const logout = async () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("persist");
+    setPersist(false);
     setAuth({});
     try {
       const response = await axios("/auth/logout", {

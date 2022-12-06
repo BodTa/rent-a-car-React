@@ -5,31 +5,62 @@ import useGeneral from "../../hooks/useGeneral";
 import { useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import CarAddForm from "./CarAddForm";
+import useOptions from "../../hooks/useOptions";
+import useInput from "../../hooks/useInput";
+import useSelectInput from "../../hooks/useSelectInput";
 const CarAdd = () => {
   const { userId } = useParams();
-  const {
-    brandOptions,
-    colorOptions,
-    fuelOptions,
-    gearOptions,
-    doorOpitons,
-    carTypeOptions,
-    notifySuccess,
-    notifyError,
-  } = useGeneral();
-  const [carType, setCarType] = useState();
-  const [carModel, setCarModel] = useState();
-  const [modelYear, setModelYear] = useState();
-  const [horsePower, setHorsePower] = useState();
-  const [engineCapacity, setEngineCapacity] = useState();
-  const [kilometer, setKilometer] = useState();
-  const [brand, setBrand] = useState();
-  const [color, setColor] = useState();
-  const [dailyPrice, setDailyPrice] = useState();
-  const [gearType, setGearType] = useState();
-  const [fuelType, setFuelType] = useState();
-  const [doorCount, setDoorCount] = useState();
-  const [description, setDescription] = useState();
+  const { brandOptions, colorOptions, notifySuccess, notifyError } =
+    useGeneral();
+  const { fuelOptions, gearOptions, doorOpitons, carTypeOptions } =
+    useOptions();
+  const [carType, resetCarType, carTypeAttribute] = useSelectInput("carType", {
+    value: 0,
+    label: "Car Type",
+  });
+  const [carModel, resetCarModel, carModelAttribute] = useInput("carModel", "");
+  const [modelYear, resetModelYear, modelYearAttribute] = useInput(
+    "modelYear",
+    "Model Year"
+  );
+  const [horsePower, resetHorsePower, horsePowerAttribute] = useInput(
+    "horsePower",
+    "Horse Power"
+  );
+  const [engineCapacity, resetEngineCapacity, engineCapacityAttribute] =
+    useInput("engineCapacity", "Engine Capacity");
+  const [kilometer, resetKilometer, kilometerAttribute] = useInput(
+    "kilometer",
+    "Kilometer"
+  );
+  const [brand, resetBrand, brandAttribute] = useSelectInput("brand", {
+    value: 0,
+    label: "Brand",
+  });
+  const [color, resetColor, colorAttribute] = useSelectInput("color", {
+    value: 0,
+    label: "Color",
+  });
+  const [dailyPrice, resetDailyPrice, dailyPriceAttribute] = useInput(
+    "dailyPrice",
+    "Daily Price"
+  );
+  const [gearType, resetGearType, gearTypeAttribute] = useSelectInput(
+    "gearType",
+    { value: 0, label: "Gear Type" }
+  );
+  const [fuelType, resetFuelType, fuelTypeAttribute] = useSelectInput(
+    "fuelType",
+    { value: 0, label: "Fuel Type" }
+  );
+  const [doorCount, resetDoorCount, doorCountAttribute] = useSelectInput(
+    "doorCount",
+    { value: 0, label: "Door Count" }
+  );
+  const [description, resetDescription, descriptionAttribute] = useInput(
+    "description",
+    ""
+  );
   const [imgFiles, setImgFiles] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
@@ -37,6 +68,20 @@ const CarAdd = () => {
   const handleCarAdd = async (e) => {
     e.preventDefault();
     try {
+      localStorage.removeItem("carModel");
+      localStorage.removeItem("carType");
+      localStorage.removeItem("description");
+      localStorage.removeItem("doorCount");
+      localStorage.removeItem("fuelType");
+      localStorage.removeItem("gearType");
+      localStorage.removeItem("dailyPrice");
+      localStorage.removeItem("color");
+      localStorage.removeItem("brand");
+      localStorage.removeItem("modelYear");
+      localStorage.removeItem("horsePower");
+      localStorage.removeItem("engineCapacity");
+      localStorage.removeItem("kilometer");
+
       const fd = new FormData();
       fd.append("SellerId", userId);
       fd.append("BrandId", brand?.value);
@@ -74,19 +119,19 @@ const CarAdd = () => {
       carTypeOptions={carTypeOptions}
       fuelOptions={fuelOptions}
       handleCarAdd={handleCarAdd}
-      setCarType={setCarType}
-      setCarModel={setCarModel}
-      setModelYear={setModelYear}
-      setHorsePower={setHorsePower}
-      setEngineCapacity={setEngineCapacity}
-      setKilometer={setKilometer}
-      setBrand={setBrand}
-      setColor={setColor}
-      setDailyPrice={setDailyPrice}
-      setGearType={setGearType}
-      setFuelType={setFuelType}
-      setDoorCount={setDoorCount}
-      setDescription={setDescription}
+      carTypeAttribute={carTypeAttribute}
+      carModelAttribute={carModelAttribute}
+      modelYearAttribute={modelYearAttribute}
+      horsePowerAttribute={horsePowerAttribute}
+      engineCapacityAttribute={engineCapacityAttribute}
+      kilometerAttribute={kilometerAttribute}
+      brandAttribute={brandAttribute}
+      colorAttribute={colorAttribute}
+      dailyPriceAttribute={dailyPriceAttribute}
+      gearTypeAttribute={gearTypeAttribute}
+      fuelTypeAttribute={fuelTypeAttribute}
+      doorCountAttribute={doorCountAttribute}
+      descriptionAttribute={descriptionAttribute}
       setImgFiles={setImgFiles}
       imgFiles={imgFiles}
     />

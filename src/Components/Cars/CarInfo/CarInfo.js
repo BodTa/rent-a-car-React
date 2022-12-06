@@ -18,10 +18,12 @@ import "./CarInfo.css";
 import carDefault from "./default-car.jpg";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import carDelete from "../../../services/cars/carDelete";
+import useAuth from "../../../hooks/useAuth";
 const CarInfo = () => {
   const axiosPrivate = useAxiosPrivate();
   const { id } = useParams();
-  const { cars, auth, isDark, notifyError, notifySuccess } = useGeneral();
+  const { cars, notifyError, notifySuccess } = useGeneral();
+  const { auth, isDark } = useAuth();
   const navigate = useNavigate();
   //Getting selected car data by given id
   const car = cars?.find(({ carId }) => carId == id);

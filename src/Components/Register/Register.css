@@ -1,3 +1,6 @@
+.register-body {
+  margin-top: 2rem;
+}
 .instructions {
   font-size: 0.75rem;
   border-radius: 0.5rem;
@@ -7,7 +10,6 @@
   position: relative;
   bottom: -10px;
 }
-
 .instructions > svg {
   margin-right: 0.25rem;
 }

@@ -14,9 +14,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useGeneral from "../../hooks/useGeneral";
 import useLogout from "../../services/auth/useLogout";
+import useAuth from "../../hooks/useAuth";
 const Navbar = () => {
-  const { auth, setCars, favorites, carsTemp, isDark, setIsDark } =
-    useGeneral();
+  const { setCars, favorites, carsTemp } = useGeneral();
+  const { auth, setIsDark, isDark } = useAuth();
   const logout = useLogout();
   const [isActive, setIsActive] = useState(false);
   const handleClick = () => {
@@ -29,7 +30,6 @@ const Navbar = () => {
     }
   };
   const handleTheme = () => {
-    console.log(!isDark);
     localStorage.setItem("isDark", !isDark);
     setIsDark(!isDark);
   };

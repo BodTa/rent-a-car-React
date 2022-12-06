@@ -1,16 +1,16 @@
-import { MotionConfig } from "framer-motion";
-import React, { useEffect, useState } from "react";
-import { lazy, Suspense } from "react";
+import React, { useEffect } from "react";
+import Card from "./Card";
 import axios from "../../api/axios";
 import carGetAll from "../../services/cars/carGetAll";
 import useGeneral from "../../hooks/useGeneral";
 import { motion } from "framer-motion";
 import Loading from "../Load-Screen/Loading";
+import useAuth from "../../hooks/useAuth";
 const Cars = () => {
-  const Card = lazy(() => import("./Card"));
   const abort = new AbortController();
-  const { auth, cars, setCars, favorites, setFavorites, setCarsTemp, isDark } =
-    useGeneral();
+  const { cars, setCars, favorites, setFavorites, setCarsTemp } = useGeneral();
+  const { auth, isDark, persist } = useAuth();
+
   // Getting user favorites
   useEffect(() => {
     const getFavs = async () => {
@@ -61,11 +61,7 @@ const Cars = () => {
       />
     );
   });
-  return (
-    <Suspense fallback={<Loading />}>
-      <motion.div className="car-container">{carCard}</motion.div>
-    </Suspense>
-  );
+  return <motion.div className="car-container">{carCard}</motion.div>;
 };
 
 export default Cars;

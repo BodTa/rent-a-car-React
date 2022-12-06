@@ -2,6 +2,9 @@
 .sign-in {
   cursor: pointer;
   position: relative;
+  color: whitesmoke;
+  background-color: transparent;
+  border: 3.2px dotted #c7f2a4;
   transition: 0.3s ease-in-out;
 }
 .sign-in::before {
@@ -10,13 +13,14 @@
   transition: 0.3s ease-in-out;
   left: 0;
   z-index: -1;
-  width: 10%;
+  width: 0%;
   height: 100%;
   content: "";
   border-radius: inherit;
   background-color: #c7f2a4;
 }
 .sign-in:hover {
+  color: black;
   transform: scale(1.05);
 }
 .sign-in:hover::before {
@@ -28,4 +32,19 @@
 .line:hover {
   transform: scale(1.05);
   color: bisque;
+}
+.persistCheck {
+  font-size: 0.75rem;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.persistCheck label {
+  margin: 0;
+}
+[type="checkbox"] {
+  height: 20px;
+  width: 20px;
+  margin: 0 5px 2px 2px;
 }
